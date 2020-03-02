@@ -1,79 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <!--TITLE-->
+  <title>1C:Awesome</title>
+
+  <!--META-->
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="1C:Awesome">
+  <meta name="keywords" content="1c, awesome, list, plugfox, plague, fox">
+  <meta name="author" content="PlugFox">
+  <meta flt-viewport="" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <!-- iOS meta tags & icons -->
+  <!-- Google SignIn meta tag -->
+  <meta name="google-signin-client_id" content="695512621921-qv4ijd1obt90nn26lm8hspbni63f3ohv.apps.googleusercontent.com">
+
+  <!-- FAVICONS -->
+  <!-- Favicon Generator. For real. https://realfavicongenerator.net -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="awesome1c">
-  <link rel="apple-touch-icon" href="/icons/Icon-192.png">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="1C:Awesome">
+  <meta name="application-name" content="1C:Awesome">
+  <meta name="msapplication-TileColor" content="#b91d47">
+  <meta name="msapplication-TileImage" content="/icons/mstile-144x144.png">
+  <meta name="msapplication-config" content="/icons/browserconfig.xml">
+  <meta name="theme-color" content="#c2185b">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="194x194" href="/icons/favicon-194x194.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+  <link rel="manifest" href="/icons/site.webmanifest">
+  <!--<link rel="manifest" href="/manifest.json">-->
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#c2185b">
+  <link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="shortcut icon" type="image/png" href="/icons/favicon.png">
+  <link rel="shortcut icon" href="/icons/favicon.ico">
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+  <!-- FONTS -->
+  <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap" rel="stylesheet"></noscript>
 
-  <title>1C:Awesome</title>
-  <link rel="manifest" href="/manifest.json">
+  <!-- STYLE -->
   <style>
     html, body {
       margin: 0;
       padding: 0;
+      background-color: #FFF;
+      overflow: hidden;
     }
-    body {
-      background-color: #FFFFFF;
-      font-family: Roboto, Helvetica, Arial, sans-serif; 
-      margin: 0; 
-      padding: 0;
+    .noscript-center {
+      position: absolute;
+      text-align: center;
+      margin: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3vw;
     }
   </style>
-  <!-- BEGIN OF FIREBASE INIT CODE -->
-  <!--
-  <script src="https://www.gstatic.com/firebasejs/7.9.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.9.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.9.0/firebase-firestore.js"></script>
-  <script>
-    var firebaseConfig = {
-      apiKey: "...",
-      authDomain: "[YOUR_PROJECT].firebaseapp.com",
-      databaseURL: "https://[YOUR_PROJECT].firebaseio.com",
-      projectId: "[YOUR_PROJECT]",
-      storageBucket: "[YOUR_PROJECT].appspot.com",
-      messagingSenderId: "...",
-      appId: "1:...:web:...",
-      measurementId: "G-..."
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-  </script>
-  -->
-  <!-- END OF FIREBASE INIT CODE -->
+
+  <!-- FIREBASE -->
+  <script defer src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.9.3/firebase-firestore.js"></script>
+  <!--<script defer src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>-->
+  <script defer src="/scripts/init-firebase.js"></script>
   
+  <!-- FLUTTER -->
+  <script defer src="main.dart.js" type="application/javascript"></script>
+
 </head>
 <body>
-  <p id="load">LOADING&hellip;</p>
-  <!--
+
+  <!-- NOSCRIPT -->
+  <noscript class='noscript-center'>Your browser does not support JavaScript!</noscript>
+
+  <!-- PWA -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        // ...
-      } catch (e) {
-        console.error(e);
-      }
-    });
-  </script>
-  -->
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
+    //<!--
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('/flutter_service_worker.js');
       });
     }
+    //-->
   </script>
-  <script src="main.dart.js" type="application/javascript"></script>
+  
+  <!-- ON LOADED -->
+  <script>
+    //<!--
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        console.log('DOM content loaded');
+      } catch (e) {
+        console.error(e);
+      }
+    });
+    //-->
+  </script>
 </body>
 </html>

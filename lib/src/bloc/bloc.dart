@@ -1,8 +1,10 @@
-import 'package:awesome1c/src/bloc/appBloc.dart';
-export 'package:awesome1c/src/bloc/appBloc.dart';
+import 'package:awesome1c/src/bloc/app/bloc.dart';
+import 'package:awesome1c/src/models/user.dart';
+export 'package:awesome1c/src/bloc/app/bloc.dart';
 
 class BlocHolder {
   final AppBloc appBloc = AppBloc();
+  User get currentUser => this.appBloc.currentUser;
 
   Future<void> close() =>
     Future.wait(<Future<void>>[
@@ -15,3 +17,4 @@ class BlocHolder {
   BlocHolder._singleton();
   /* SINGLETON - */
 }
+

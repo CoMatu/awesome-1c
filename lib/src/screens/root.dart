@@ -1,4 +1,4 @@
-import 'package:awesome1c/src/widgets/plugScaffold.dart';
+import 'package:awesome1c/src/widgets/plug_scaffold.dart';
 import 'package:flutter/material.dart';
 
 /// Пустой экран

@@ -1,12 +1,20 @@
+import 'package:awesome1c/src/bloc/plague_bloc_delegate.dart';
+import 'package:awesome1c/src/models/app_theme.dart';
+import 'package:awesome1c/src/repository/logger.dart';
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:awesome1c/src/bloc/bloc.dart';
 import 'package:awesome1c/src/screens/screens.dart';
 
 /// Запуск приложения
-void start() => 
+void start() {
+  final Log _log = Log();
+  _log.v('Приложение запускается');
+  BlocSupervisor.delegate = PlagueBlocDelegate();
+  //WidgetsFlutterBinding.ensureInitialized();
   runApp(const GlobalContext(key: Key('GlobalContext')));
+}
 
 /// Глобальный контекст приложения
 class GlobalContext extends StatelessWidget {
@@ -35,22 +43,19 @@ class App extends StatelessWidget {
     final AppBloc _appBloc = Provider.of<BlocHolder>(context)
       .appBloc
         ..add(InitApp())
-        ..whereType<AppRoutingState>()
+        ..whereState<AppRoutingState>()
           .forEach(_appNavigator.routeFromState);
     return StreamBuilder<AppThemeChangedState>(
-      stream: _appBloc.whereType<AppThemeChangedState>(),
+      stream: _appBloc.whereState<AppThemeChangedState>(),
       builder: (BuildContext context, AsyncSnapshot<AppThemeChangedState> snapshot) =>
         MaterialApp(
           key: const Key('MaterialApp'),
           navigatorKey: _appNavigator.navigatorKey,
-          debugShowCheckedModeBanner: false,
           title: '1C:Awesome',
           initialRoute: '/',
           onGenerateRoute: _appNavigator.onGenerateRoute,
-          theme: ThemeData(
-            primarySwatch: snapshot.hasData ? Colors.yellow : Colors.yellow,
-            primaryColor: snapshot.hasData ? Colors.yellow : Colors.yellow,
-          ),
+          theme: snapshot?.data?.appTheme?.themeData ?? AppTheme.defaultThemeData,
+          //debugShowCheckedModeBanner: false,
         ),
     );
   }
@@ -70,6 +75,9 @@ class AppNavigator {
       this.navigator.pushNamedAndRemoveUntil(LoadingScreen.route, (Route<void> route) => false);
     } else if (state is InitializedAppState) {
       this.navigator.pushNamedAndRemoveUntil(HomeScreen.route, (Route<void> route) => false);
+    } else if (state is NotAuthorized) {
+      if (!state.showAuthScreen) return;
+      this.navigator.pushNamed(AuthorizeScreen.route,);
     }
   }
   void dispose() =>    
@@ -82,6 +90,7 @@ class AppNavigator {
         case LoadingScreen.route: return LoadingScreen();
         case SettingsScreen.route: return SettingsScreen();
         case CriticalErrorScreen.route: return CriticalErrorScreen();
+        case AuthorizeScreen.route: return AuthorizeScreen();
         default: return NotFoundScreen();
       }
     }

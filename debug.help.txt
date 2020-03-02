@@ -1,0 +1,55 @@
+Run your Flutter app on an attached device.
+
+Usage: flutter run [arguments]
+-h, --help                                            Print this usage information.
+    --debug                                           Build a debug version of your app (default mode).
+    --profile                                         Build a version of your app specialized for performance profiling.
+    --release                                         Build a release version of your app.
+    --flavor                                          Build a custom app flavor as defined by platform-specific build setup.
+                                                      Supports the use of product flavors in Android Gradle scripts, and the use of custom Xcode schemes.
+
+    --trace-startup                                   Trace application startup, then exit, saving the trace to a file.
+    --verbose-system-logs                             Include verbose logging from the flutter engine.
+    --cache-sksl                                      Only cache the shader in SkSL instead of binary or GLSL.
+    --dump-skp-on-shader-compilation                  Automatically dump the skp that triggers new shader compilations. This is useful for wrting custom ShaderWarmUp to reduce jank. By default, this is not enabled to reduce the overhead. This is only available in profile or debug build. 
+    --route                                           Which route to load when running the app.
+    --vmservice-out-file=<project/example/out.txt>    A file to write the attached vmservice uri to after an application is started.
+-t, --target=<path>                                   The main entry-point file of the application, as run on the device.
+                                                      If the --target option is omitted, but a file name is provided on the command line, then that is used instead.
+                                                      (defaults to "lib\main.dart")
+
+    --observatory-port                                (deprecated use host-vmservice-port instead) Listen to the given port for an observatory debugger connection.
+                                                      Specifying port 0 (the default) will find a random free port.
+
+    --device-vmservice-port                           Look for vmservice connections only from the specified port.
+                                                      Specifying port 0 (the default) will accept the first vmservice discovered.
+
+    --host-vmservice-port                             When a device-side vmservice port is forwarded to a host-side port, use this value as the host port.
+                                                      Specifying port 0 (the default) will find a random free host port.
+
+    --[no-]pub                                        Whether to run "flutter pub get" before executing this command.
+                                                      (defaults to on)
+
+    --[no-]track-widget-creation                      Track widget creation locations. This enables features such as the widget inspector. This parameter is only functional in debug mode (i.e. when compiling JIT, not AOT).
+                                                      (defaults to on)
+
+    --start-paused                                    Start in a paused mode and wait for a debugger to connect.
+    --enable-software-rendering                       Enable rendering using the Skia software backend. This is useful when testing Flutter on emulators. By default, Flutter will attempt to either use OpenGL or Vulkan and fall back to software when neither is available.
+    --skia-deterministic-rendering                    When combined with --enable-software-rendering, provides 100% deterministic Skia rendering.
+    --trace-skia                                      Enable tracing of Skia code. This is useful when debugging the GPU thread. By default, Flutter will not log skia code.
+    --endless-trace-buffer                            Enable tracing to the endless tracer. This is useful when recording huge amounts of traces. If we need to use endless buffer to record startup traces, we can combine the ("--trace-startup"). For exemple, flutter run --trace-startup --endless-trace-buffer. 
+    --trace-systrace                                  Enable tracing to the system tracer. This is only useful on platforms where such a tracer is available (Android and Fuchsia).
+    --[no-]await-first-frame-when-tracing             Whether to wait for the first frame when tracing startup ("--trace-startup"), or just dump the trace as soon as the application is running. The first frame is detected by looking for a Timeline event with the name "Rasterized first useful frame". By default, the widgets library's binding takes care of sending this event. 
+                                                      (defaults to on)
+
+    --[no-]use-test-fonts                             Enable (and default to) the "Ahem" font. This is a special font used in tests to remove any dependencies on the font metrics. It is enabled when you use "flutter test". Set this flag when running a test using "flutter run" for debugging purposes. This flag is only available when running in debug mode.
+    --[no-]build                                      If necessary, build the app before running.
+                                                      (defaults to on)
+
+    --[no-]hot                                        Run with support for hot reloading. Only available for debug mode. Not available with "--trace-startup".
+                                                      (defaults to on)
+
+    --pid-file                                        Specify a file to write the process id to. You can send SIGUSR1 to trigger a hot reload and SIGUSR2 to trigger a hot restart.
+    --[no-]fast-start                                 Whether to quickly bootstrap applications with a minimal app. Currently this is only supported on Android devices. This option cannot be paired with --use-application-binary.
+
+Run "flutter help" to see global options.
