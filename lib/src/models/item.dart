@@ -3,45 +3,59 @@ import 'package:hive/hive.dart';
 
 part 'item.g.dart';
 
+///
 @HiveType(typeId: 1, adapterName: 'ItemAdapter')
 class Item extends HiveObject {
   
+  ///
   @HiveField(0)
   String uid;
   
+  ///
   @HiveField(1)
   DateTime created;
 
+  ///
   @HiveField(2)
   DateTime updated;
   
+  ///
   @HiveField(3)
   bool isDeleted;
 
+  ///
   @HiveField(4)
   bool isApproved;
 
+  ///
   @HiveField(5)
   String lang;
 
+  ///
   @HiveField(6)
   String title;
 
+  ///
   @HiveField(7)
   String description;
 
+  ///
   @HiveField(8)
   User user;
 
+  ///
   @HiveField(9)
   String url;
 
+  ///
   @HiveField(10)
   String icon;
 
+  ///
   @HiveField(11)
   String additional;
 
+  ///
   Item({
     this.uid,
     this.created,
@@ -57,6 +71,7 @@ class Item extends HiveObject {
     this.additional,
   }): assert(uid is String && user is User && title is String);
 
+  ///
   factory Item.fromUser(User user) {
     final DateTime _dt = DateTime.now();
     return Item(
@@ -67,6 +82,7 @@ class Item extends HiveObject {
     );
   }
 
+  ///
   factory Item.fromFirebase({
     String uid,
     DateTime created,
@@ -95,6 +111,7 @@ class Item extends HiveObject {
     additional: additional,
   );
 
+  ///
   Map<String, dynamic> toFirebase() => <String, dynamic>{
     'uid': uid,
     'created': created?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch,
@@ -113,16 +130,21 @@ class Item extends HiveObject {
   static String _genUID(User user, [DateTime date]) =>
     '${user.providerId}-${user.uid}-${(date ?? DateTime.now()).millisecondsSinceEpoch.toRadixString(36)}';
 
+  ///
   bool get isEmpty =>
-    (this.uid?.isEmpty ?? true);
+    (uid?.isEmpty ?? true);
 
+  ///
   bool get isNotEmpty =>
-    (this.uid?.isNotEmpty ?? false);
+    (uid?.isNotEmpty ?? false);
   
+  ///
   @override
   int get hashCode => 
-    this.uid.hashCode;
+    uid.hashCode;
+
+  ///
   @override
   operator ==(Object obj) => 
-    obj is Item && obj.uid == this.uid;
+    obj is Item && obj.uid == uid;
 }

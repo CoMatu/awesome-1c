@@ -4,7 +4,7 @@ export 'package:awesome1c/src/bloc/app/bloc.dart';
 
 class BlocHolder {
   final AppBloc appBloc = AppBloc();
-  User get currentUser => this.appBloc.currentUser;
+  User get currentUser => appBloc.currentUser;
 
   Future<void> close() =>
     Future.wait(<Future<void>>[

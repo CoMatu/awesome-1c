@@ -40,7 +40,7 @@ class Authorized extends AppState with AuthorizedState, AppRoutingState {
 class NotAuthorized extends AppState with AuthorizedState, AppRoutingState {
   final bool showAuthScreen;
   const NotAuthorized({bool showAuthScreen = false})
-    : this.showAuthScreen = showAuthScreen ?? false;
+    : showAuthScreen = showAuthScreen ?? false;
 }
 
 

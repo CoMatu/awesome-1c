@@ -18,8 +18,8 @@ class AuthorizeScreen extends StatelessWidget {
               stream: blocHolder.appBloc.whereState<AuthorizedState>(),
               builder: (BuildContext context, AsyncSnapshot<AuthorizedState> snapshot) =>
                 blocHolder.currentUser.isEmpty
-                ? _AuthButton(() => blocHolder.appBloc.add(SignIn()))
-                : _CurrentUserInfo(() => blocHolder.appBloc.add(SignOut())),
+                ? _AuthButton(() => blocHolder.appBloc.add(const SignIn()))
+                : _CurrentUserInfo(() => blocHolder.appBloc.add(const SignOut())),
             ),
         ),
       ),
@@ -36,7 +36,7 @@ class _AuthButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
     RaisedButton(
-      child: Text('LogIn'),
+      child: const Text('LogIn'),
       onPressed: callback,
     );
 }
@@ -50,7 +50,7 @@ class _CurrentUserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
     RaisedButton(
-      child: Text('LogOut'),
+      child: const Text('LogOut'),
       onPressed: callback,
     );
 }

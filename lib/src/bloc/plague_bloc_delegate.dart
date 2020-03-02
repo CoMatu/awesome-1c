@@ -7,18 +7,18 @@ class PlagueBlocDelegate extends BlocDelegate {
   @override
   void onEvent(Bloc bloc, Object event) {
     super.onEvent(bloc, event);
-    //this._log.vvvvvv('Event \'${event.toString()}\' in BLoC \'${bloc.toString()}\'');
+    //_log.vvvvvv('Event \'${event.toString()}\' in BLoC \'${bloc.toString()}\'');
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    //this._log.vvvvvv('Transition \'${transition.currentState.toString()} -> ${transition.nextState.toString()}\' with event \'${transition.event.toString()}\' in BLoC \'${bloc.toString()}\'');
+    //_log.vvvvvv('Transition \'${transition.currentState.toString()} -> ${transition.nextState.toString()}\' with event \'${transition.event.toString()}\' in BLoC \'${bloc.toString()}\'');
   }
 
   @override
   void onError(Bloc bloc, Object error, StackTrace stacktrace) {
     super.onError(bloc, error, stacktrace);
-    this._log.e('Error \'${error.toString()}\' in BLoC \'${bloc.toString()}\'');
+    _log.e('Error \'${error.toString()}\' in BLoC \'${bloc.toString()}\'');
   }
 }

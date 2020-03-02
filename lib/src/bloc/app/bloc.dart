@@ -19,14 +19,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   AppState get initialState => InitialAppState();
 
   User _currentUser = User.empty();
-  User get currentUser => this._currentUser ?? User.empty();
+  User get currentUser => _currentUser ?? User.empty();
 
   final Log _log = Log();
   final FirebaseProvider _firebaseProvider = FirebaseProvider();
   final HiveProvider _hiveProvider = HiveProvider();
 
   Stream<T> whereState<T>() =>
-    this.whereType<T>();
+    whereType<T>();
 
   @override
   Stream<AppState> mapEventToState(AppEvent event) async* {
@@ -64,7 +64,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     // Current user
     _log.vvv('Установим поток состояний авторизации');
     unawaited(
-      _firebaseProvider.onAuthStateChanged.forEach((User user) => this.add(SetAuthState(user)))
+      _firebaseProvider.onAuthStateChanged.forEach((User user) => add(SetAuthState(user)))
     );
 
     yield InitializedAppState();
@@ -98,7 +98,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     }
     if (currentUser is! User || currentUser.isEmpty) {
       _log.vvv('Нельзя создать новый элемент так как не авторизован. Будет показан экран авторизации');
-      return NotAuthorized(showAuthScreen: true);
+      return const NotAuthorized(showAuthScreen: true);
     }
     _log.vvv('Начать создание нового элемента');
     return CreateItem(Item.fromUser(currentUser));
@@ -107,12 +107,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   //
   Stream<AppState> _setAuthState(SetAuthState event) async* {
     if (event.authorized) {
-      this._currentUser = event.user;
-      yield Authorized(this.currentUser);
-      _log.vvv('Авторизован как ${this.currentUser.toString()}');
+      _currentUser = event.user;
+      yield Authorized(currentUser);
+      _log.vvv('Авторизован как ${currentUser.toString()}');
     } else {
-      this._currentUser = User.empty();
-      yield NotAuthorized();
+      _currentUser = User.empty();
+      yield const NotAuthorized();
       _log.vvv('Не авторизован');
     }
   }

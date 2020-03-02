@@ -11,18 +11,18 @@ class FirebaseProvider {
   fb_auth.FirebaseAuth _auth;
   fb_store.Firestore _store;
   Stream<User> _onAuthStateChanged;
-  Stream<User> get onAuthStateChanged => this._onAuthStateChanged;
+  Stream<User> get onAuthStateChanged => _onAuthStateChanged;
   
   bool _isInit = false;
 
   /// Проверка инициализации Firebase
   Future<void> init() async {
-    if (this._isInit) return;
-    this._app = await fb_core.FirebaseApp.allApps().then((List<fb_core.FirebaseApp> apps) => apps?.first);
-    this._auth = fb_auth.FirebaseAuth.fromApp(this._app);
-    this._store = fb_store.Firestore.instance;    
-    this._isInit = this._app is fb_core.FirebaseApp;
-    this._onAuthStateChanged = _auth.onAuthStateChanged.map<User>((fb_auth.FirebaseUser event) => 
+    if (_isInit) return;
+    _app = await fb_core.FirebaseApp.allApps().then((List<fb_core.FirebaseApp> apps) => apps?.first);
+    _auth = fb_auth.FirebaseAuth.fromApp(_app);
+    _store = fb_store.Firestore.instance;    
+    _isInit = _app is fb_core.FirebaseApp;
+    _onAuthStateChanged = _auth.onAuthStateChanged.map<User>((fb_auth.FirebaseUser event) => 
       User(
         providerId: event?.providerId ?? '',
         uid: event?.uid ?? '',
@@ -30,7 +30,7 @@ class FirebaseProvider {
         email: event?.email ?? '',
         photoUrl: event?.photoUrl ?? '',
       ))..handleError((dynamic error) => _log.e('Произошла ошибка подписки на смену состояний авторизации FirebaseAuth: ${error.toString()}'));
-    _log.vv(this._isInit ? 'Firebase приложение (${this._app.name}) успешно инициализировано' : 'Firebase приложение не инициализировано');
+    _log.vv(_isInit ? 'Firebase приложение (${_app.name}) успешно инициализировано' : 'Firebase приложение не инициализировано');
   }
 
   ///

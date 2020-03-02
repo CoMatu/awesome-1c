@@ -13,6 +13,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) =>
     PlugScaffold(
       showAppBar: false,
-      child: Center(child: CircularProgressIndicator(),),
+      child: const Center(child: CircularProgressIndicator(),),
     );
 }

@@ -1,6 +1,7 @@
 import 'package:awesome1c/src/bloc/plague_bloc_delegate.dart';
 import 'package:awesome1c/src/models/app_theme.dart';
 import 'package:awesome1c/src/repository/logger.dart';
+import 'package:awesome1c/src/repository/platform.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,8 @@ class GlobalContext extends StatelessWidget {
       providers: [
         Provider<BlocHolder>(create: (_) => BlocHolder(), dispose: (_, BlocHolder bloc) => bloc.close(),),
         Provider<AppNavigator>(create: (_) => AppNavigator(), dispose: (_, AppNavigator appNavigator) => appNavigator.dispose(),),
+        Provider<Platform>(create: (_) => Platform(),),
+        Provider<Log>(create: (_) => Log(),),
       ],
       child: const App(key: Key('App')),
     );
@@ -42,7 +45,7 @@ class App extends StatelessWidget {
     // ignore: close_sinks
     final AppBloc _appBloc = Provider.of<BlocHolder>(context)
       .appBloc
-        ..add(InitApp())
+        ..add(const InitApp())
         ..whereState<AppRoutingState>()
           .forEach(_appNavigator.routeFromState);
     return StreamBuilder<AppThemeChangedState>(
@@ -63,30 +66,30 @@ class App extends StatelessWidget {
 
 /// Навигатор приложения
 class AppNavigator {
-  NavigatorState get navigator => this._navigatorKey?.currentState;
-  GlobalKey<NavigatorState> get navigatorKey => this._navigatorKey;
+  NavigatorState get navigator => _navigatorKey?.currentState;
+  GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   /// Роутер для MaterialApp
   Route<void> onGenerateRoute(RouteSettings routeSettings) =>
-    this._innerRouter(routeSettings);
+    _innerRouter(routeSettings);
   /// Производит автороутинг из состояния приложения
   void routeFromState(AppRoutingState state) {
     if (state is InitialAppState) {
-      this.navigator.pushNamedAndRemoveUntil(LoadingScreen.route, (Route<void> route) => false);
+      navigator.pushNamedAndRemoveUntil(LoadingScreen.route, (Route<void> route) => false);
     } else if (state is InitializedAppState) {
-      this.navigator.pushNamedAndRemoveUntil(HomeScreen.route, (Route<void> route) => false);
+      navigator.pushNamedAndRemoveUntil(HomeScreen.route, (Route<void> route) => false);
     } else if (state is NotAuthorized) {
       if (!state.showAuthScreen) return;
-      this.navigator.pushNamed(AuthorizeScreen.route,);
+      navigator.pushNamed(AuthorizeScreen.route,);
     }
   }
   void dispose() =>    
-    this.navigator?.dispose();
+    navigator?.dispose();
   Route<void> _innerRouter(RouteSettings settings) {
     Widget _selectScreen(RouteSettings settings) {
       switch (settings.name) {
         case RootScreen.route: return RootScreen();
-        case HomeScreen.route: return HomeScreen();
+        case HomeScreen.route: return const HomeScreen();
         case LoadingScreen.route: return LoadingScreen();
         case SettingsScreen.route: return SettingsScreen();
         case CriticalErrorScreen.route: return CriticalErrorScreen();
@@ -97,7 +100,7 @@ class AppNavigator {
     Route<void> _buildMaterialPageRoute(Widget screen, [RouteSettings settings, bool maintainState = true, bool fullscreenDialog = false]) =>
       MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => screen,
-        settings: settings ?? RouteSettings(),
+        settings: settings ?? const RouteSettings(),
         maintainState: maintainState,
         fullscreenDialog: fullscreenDialog,
       );

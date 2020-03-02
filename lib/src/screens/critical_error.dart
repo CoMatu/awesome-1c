@@ -9,6 +9,6 @@ class CriticalErrorScreen extends StatelessWidget {
   Widget build(BuildContext context) =>
       PlugScaffold(
         showAppBar: false,
-        child: Center(child: const Text('Critical error'),),
+        child: const Center(child: Text('Critical error'),),
       );
 }

@@ -1,55 +1,88 @@
 import 'dart:async';
+import 'package:awesome1c/src/repository/log_storage/log_storage.dart';
 
-typedef LogWriter = FutureOr<String> Function(String message);
+typedef LogWriter = FutureOr<void> Function(LogMessage logMessage);
 
 class Log {
-  final StreamController<String> _controller = StreamController();
+  final StreamController<LogMessage> _controller = StreamController();
+  final LogStorage _logStorage = LogStorage(template: r'[$level] $message');
 
-  void v(dynamic message) => _l('*', message.toString());
-  void vv(dynamic message) => _l('**', message.toString());
-  void vvv(dynamic message) => _l('***', message.toString());
-  void vvvv(dynamic message) => _l('****', message.toString());
-  void vvvvv(dynamic message) => _l('*****', message.toString());
-  void vvvvvv(dynamic message) => _l('******', message.toString());
-  // warning
-  void w(dynamic message) => _l('W', message.toString());
-  // error
-  void e(dynamic message) => _l('E', message.toString());
+  /// Verbose 1
+  void v(dynamic message) =>      _l(message, LogLevel.v);
 
-  void _l(String prefix, String msg) {
+  /// Verbose 2
+  void vv(dynamic message) =>     _l(message, LogLevel.vv);
+
+  /// Verbose 3
+  void vvv(dynamic message) =>    _l(message, LogLevel.vvv);
+
+  /// Verbose 4
+  void vvvv(dynamic message) =>   _l(message, LogLevel.vvvv);
+
+  /// Verbose 5
+  void vvvvv(dynamic message) =>  _l(message, LogLevel.vvvvv);
+
+  /// Verbose 6
+  void vvvvvv(dynamic message) => _l(message, LogLevel.vvvvvv);
+
+  /// Info
+  void i(dynamic message) =>      _l(message, LogLevel.info);
+
+  /// Warning
+  void w(dynamic message) =>      _l(message, LogLevel.warning);
+
+  /// Error
+  void e(dynamic message) =>      _l(message, LogLevel.error);
+
+  /// Debug
+  void d(dynamic message) =>      _l(message, LogLevel.debug);
+
+  void _l(Object message, LogLevel prefix) {
     final DateTime _now = DateTime.now();
-    this._controller.sink.add(' ${_now.toIso8601String()} || ${prefix.padLeft(6)} || $msg ');
+    _controller.sink.add(LogMessage(date: _now, message: message, level: prefix));
   }
 
+  /// close
   Future<void> close() =>
     _controller.close();
 
-  // Синхронный итератор задач
-  Stream<String> iterateLog(StreamIterator<String> iterator, LogWriter writer) {
-    StreamController<String> _resultSC = StreamController<String>();
+  // Семафор - итератор задач
+  Stream<void> _iterateLog(StreamIterator<LogMessage> iterator, LogWriter writer) {
+    SynchronousStreamController<void> _resultSC = StreamController<void>(sync: true) as SynchronousStreamController<void>;
     Future.doWhile(() => 
       iterator
         .moveNext()
         .then((bool hasNext) =>
           hasNext
-          ? Future.value(writer(iterator.current)).then<void>(_resultSC.sink.add).then<bool>((_) => true)
+          ? Future<void>.value(writer(iterator.current)).then<void>(_resultSC.sink.add).then<bool>((void _) => true)
           : _resultSC.close().then<bool>((void _) => false)
         )
     );
     return _resultSC.stream;
   }
 
+  /// Запуск итератора
+  void _startLogIterrator() {
+    // Итератор потока поступающих задач 
+    final StreamIterator<LogMessage> _logIterator = StreamIterator<LogMessage>(_controller.stream);    
+    // Запускаем итератор
+    _iterateLog(_logIterator, (LogMessage logMessage) async {
+      return await _logStorage.store(logMessage);
+    });
+  }
+
+  @override
+  int get hashCode => 0;
+  @override
+  operator ==(Object obj) => obj is Log;
+  @override
+  String toString() => 'Instance of \'Log\'';
+
   // SINGLETON +
   static final Log _singleton = Log._internal();
   factory Log() => _singleton;
   Log._internal() {
-    // Итератор потока поступающих задач 
-    final StreamIterator<String> _logIterator = StreamIterator<String>(_controller.stream);    
-    // Запускаем итератор
-    iterateLog(_logIterator, (String message) async {
-      print(message);
-      return message;
-    });
+    _startLogIterrator();
   }
   // SINGLETON -
 }

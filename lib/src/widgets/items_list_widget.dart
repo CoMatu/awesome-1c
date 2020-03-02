@@ -22,9 +22,9 @@ class _ItemListTile extends StatelessWidget {
       child: ListTile(
         title: SizedBox(
           height: 25,
-          child: Text('Index #${this.index}'),
+          child: Text('Index #$index'),
         ),
-        subtitle: SizedBox(
+        subtitle: const SizedBox(
           height: 75,
           child: Placeholder(),
         ),

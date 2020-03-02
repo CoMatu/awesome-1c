@@ -9,7 +9,7 @@ class NotFoundScreen extends StatelessWidget {
   Widget build(BuildContext context) =>
     PlugScaffold(
       title: '404: Not Found',
-      child: Center(
+      child: const Center(
         child: Text('404: Not Found'),
       ),
     );

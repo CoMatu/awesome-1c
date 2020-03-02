@@ -17,12 +17,21 @@ class PlugScaffold extends StatefulWidget {
   final double minHeight;
   final _AppBarSearchController _searchController;
   final VoidCallback createButtonCallback;
-  PlugScaffold({Key key, this.title, @required this.child, this.extraChild, bool showAppBar = true, TextEditingController searchController, this.createButtonCallback, double minWidth, double minHeight})
+  PlugScaffold({
+    Key key, 
+    this.title, 
+    @required this.child, 
+    this.extraChild, 
+    bool showAppBar = true, 
+    TextEditingController searchController, 
+    this.createButtonCallback, 
+    double minWidth, 
+    double minHeight})
     : assert(child is Widget)
-    , this.showAppBar = showAppBar ?? true
-    , this._searchController = _AppBarSearchController.fromTextEditingController(searchController)
-    , this.minWidth = minWidth ?? 340
-    , this.minHeight = minHeight ?? 340
+    , showAppBar = showAppBar ?? true
+    , _searchController = _AppBarSearchController.fromTextEditingController(searchController)
+    , minWidth = minWidth ?? 340
+    , minHeight = minHeight ?? 340
     , super(key: key);
 
   @override
@@ -74,7 +83,7 @@ class _PlugScaffoldAppBar extends StatefulWidget implements PreferredSizeWidget 
 
   _PlugScaffoldAppBar({Key key, String title = ''}) 
     : preferredSize = Size.fromHeight(kToolbarHeight)
-    , this.title = title ?? ''
+    , title = title ?? ''
     , super(key: key);
 
   @override
@@ -89,19 +98,19 @@ class _PlugScaffoldAppBarState extends State<_PlugScaffoldAppBar> {
   @override
   void initState() {
     super.initState();
-    this.active = false;
+    active = false;
   }
 
   @override
   Widget build(BuildContext context) =>
     AppBar(
       leading: const _PlugScaffoldLeadIcon(),
-      title: this.active ? const _SearchField() : Text(widget.title),
+      title: active ? const _SearchField() : Text(widget.title),
       centerTitle: true,
       actions: (Provider.of<_AppBarSearchController>(context)?.isEnabled ?? false)
         ? <Widget>[
           IconButton(
-            icon: this.active ? const Icon(Icons.close) : const Icon(Icons.search,),
+            icon: active ? const Icon(Icons.close) : const Icon(Icons.search,),
             onPressed: _toogleSearchButton,
           ),
         ]
@@ -110,7 +119,7 @@ class _PlugScaffoldAppBarState extends State<_PlugScaffoldAppBar> {
   
   void _toogleSearchButton() =>
     setState(() {
-      this.active = !this.active;
+      active = !active;
     });
 }
 
@@ -123,7 +132,7 @@ class _SearchField extends StatelessWidget {
   Widget build(BuildContext context) =>
     TextField(
       controller: Provider.of<_AppBarSearchController>(context).searchController,
-      decoration: new InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'Поиск...'
       ),
     );
@@ -139,11 +148,11 @@ class _PlugScaffoldLeadIcon extends StatelessWidget {
     Navigator.of(context)?.canPop() ?? false
     ? IconButton(
       icon: Icon(Icons.arrow_back_ios),
-      onPressed: () => this._pop(context),
+      onPressed: () => _pop(context),
     )
     : IconButton(
       icon: Icon(Icons.menu),
-      onPressed: () => this._showDrawer(context),
+      onPressed: () => _showDrawer(context),
     );
 
   void _showDrawer(BuildContext context) {
@@ -169,8 +178,8 @@ class _PlugScaffoldDrawer extends StatelessWidget {
         children: <Widget>[
           _PlugScaffoldDrawerHeader(),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Настройки'),
+            leading: const Icon(Icons.settings),
+            title: const Text('Настройки'),
             onTap: () => Navigator.of(context)?.pushNamed(SettingsScreen.route),
           ),
         ],
@@ -192,7 +201,7 @@ class _PlugScaffoldDrawerHeader extends StatelessWidget {
           final User currentUser = blocHolder.appBloc.currentUser;
           final ImageProvider<dynamic> image = ((currentUser?.isNotEmpty ?? false)
             ? NetworkImage(currentUser.photoUrl)
-            : AssetImage('assets/images/unauthorized_user.png')) as ImageProvider;
+            : const AssetImage('assets/images/unauthorized_user.png')) as ImageProvider;
           return Center(
             child: SizedBox(
               width: 64,
@@ -239,7 +248,7 @@ class _PlugScaffoldDrawerHeaderImage extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       color: Colors.transparent,
       child: Ink.image(
-        image: this.image,
+        image: image,
         fit: BoxFit.cover,
         width: 64.0,
         height: 64.0,
@@ -262,10 +271,10 @@ class _PlugScaffoldContent extends StatelessWidget {
   Widget build(BuildContext context) =>
     LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) =>
-        ((constraints?.maxWidth ?? .0) < (PlugScaffold.maxChildWidth*2) || this.extraChild == null) 
+        ((constraints?.maxWidth ?? .0) < (PlugScaffold.maxChildWidth*2) || extraChild == null) 
         ? ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: PlugScaffold.maxChildWidth),
-            child: this.child,
+            child: child,
           )
         : ConstrainedBox(
             constraints: const BoxConstraints(
@@ -279,12 +288,12 @@ class _PlugScaffoldContent extends StatelessWidget {
               children: <Widget>[
                 SizedBox(
                   width: PlugScaffold.maxChildWidth,
-                  child: this.child,
+                  child: child,
                 ),
-                Spacer(),
+                const Spacer(),
                 SizedBox(
                   width: PlugScaffold.maxChildWidth,
-                  child: this.extraChild,
+                  child: extraChild,
                 ),
               ],
             ),
@@ -299,6 +308,6 @@ class _AppBarSearchController {
   final TextEditingController searchController;
 
   _AppBarSearchController.fromTextEditingController(TextEditingController searchController)
-    : this.isEnabled = searchController != null && searchController is TextEditingController
-    , this.searchController = searchController;
+    : isEnabled = searchController != null && searchController is TextEditingController
+    , searchController = searchController;
 }

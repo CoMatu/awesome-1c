@@ -19,12 +19,12 @@ class AppTheme {
   static ThemeData get defaultThemeData => AppTheme._getThemeData(_AppThemeOptions.vanilla);
   const AppTheme._internal(this._option);
 
-  factory AppTheme.vanilla() => AppTheme._internal(_AppThemeOptions.vanilla);
-  factory AppTheme.legacy() => AppTheme._internal(_AppThemeOptions.legacy);
-  factory AppTheme.material() => AppTheme._internal(_AppThemeOptions.material);
-  factory AppTheme.simple() => AppTheme._internal(_AppThemeOptions.simple);
-  factory AppTheme.fuchsia() => AppTheme._internal(_AppThemeOptions.fuchsia);
-  factory AppTheme.darcula() => AppTheme._internal(_AppThemeOptions.darcula);
+  factory AppTheme.vanilla() => const AppTheme._internal(_AppThemeOptions.vanilla);
+  factory AppTheme.legacy() => const AppTheme._internal(_AppThemeOptions.legacy);
+  factory AppTheme.material() => const AppTheme._internal(_AppThemeOptions.material);
+  factory AppTheme.simple() => const AppTheme._internal(_AppThemeOptions.simple);
+  factory AppTheme.fuchsia() => const AppTheme._internal(_AppThemeOptions.fuchsia);
+  factory AppTheme.darcula() => const AppTheme._internal(_AppThemeOptions.darcula);
 
   static ThemeData _getThemeData(_AppThemeOptions option) {
     ThemeData _currentThemeRouter() {

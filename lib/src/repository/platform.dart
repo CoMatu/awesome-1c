@@ -14,14 +14,14 @@ enum BuildMode {
 class Platform {
   final HostPlatform _hostPlatform;
   final BuildMode buildMode;
-  HostPlatformType get type => this._hostPlatform.type ?? HostPlatformType.unknown;
-  OperatingSystem get operatingSystem => this._hostPlatform.operatingSystem ?? OperatingSystem.unknown;
-  String get version => this._hostPlatform.version;
-  num get versionNumber => this._hostPlatform.versionNumber;
-  String get locale => this._hostPlatform.locale;
-  bool get isPlatformKnown => this.type != HostPlatformType.unknown;
-  bool get isOperatingSystemKnown => this.operatingSystem != OperatingSystem.unknown;
-  bool get isMobile => [OperatingSystem.android, OperatingSystem.iOS].contains(this.operatingSystem);
+  HostPlatformType get type => _hostPlatform.type ?? HostPlatformType.unknown;
+  OperatingSystem get operatingSystem => _hostPlatform.operatingSystem ?? OperatingSystem.unknown;
+  String get version => _hostPlatform.version;
+  num get versionNumber => _hostPlatform.versionNumber;
+  String get locale => _hostPlatform.locale;
+  bool get isPlatformKnown => type != HostPlatformType.unknown;
+  bool get isOperatingSystemKnown => operatingSystem != OperatingSystem.unknown;
+  bool get isMobile => [OperatingSystem.android, OperatingSystem.iOS].contains(operatingSystem);
 
   bool isUnitTesting = false;
 
@@ -45,7 +45,7 @@ class Platform {
   static final Platform _this = Platform._internal();
   factory Platform() => _this;
   Platform._internal()
-    : this._hostPlatform = _getHostPlatform()
-    , this.buildMode = _getCurrentBuildMode();
+    : _hostPlatform = _getHostPlatform()
+    , buildMode = _getCurrentBuildMode();
   // SINGLETON -
 }

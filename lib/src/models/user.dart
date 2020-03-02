@@ -24,14 +24,17 @@ class User extends HiveObject {
   @HiveField(4)
   String photoUrl;
 
+  ///
   bool get isEmpty =>
-    (this.providerId?.isEmpty ?? true)
-    && (this.uid?.isEmpty ?? true);
+    (providerId?.isEmpty ?? true)
+    && (uid?.isEmpty ?? true);
 
+  ///
   bool get isNotEmpty =>
-    (this.providerId?.isNotEmpty ?? false)
-    && (this.uid?.isNotEmpty ?? false);
+    (providerId?.isNotEmpty ?? false)
+    && (uid?.isNotEmpty ?? false);
 
+  ///
   User({
     String providerId,
     String uid,
@@ -39,19 +42,21 @@ class User extends HiveObject {
     String email,
     String photoUrl,
   }) : assert(providerId is String && uid is String && displayName is String && email is String)
-    , this.providerId = providerId ?? ''
-    , this.uid = uid ?? ''
-    , this.displayName = displayName ?? ''
-    , this.email = email ?? ''
-    , this.photoUrl = photoUrl ?? '';
+    , providerId = providerId ?? ''
+    , uid = uid ?? ''
+    , displayName = displayName ?? ''
+    , email = email ?? ''
+    , photoUrl = photoUrl ?? '';
 
+  ///
   User.empty()
-    : this.providerId = ''
-    , this.uid = ''
-    , this.displayName = ''
-    , this.email = ''
-    , this.photoUrl = '';
+    : providerId = ''
+    , uid = ''
+    , displayName = ''
+    , email = ''
+    , photoUrl = '';
 
+  ///
   factory User.fromFirebase({
     String providerId,
     String uid,
@@ -66,6 +71,7 @@ class User extends HiveObject {
     photoUrl: photoUrl,
   );
 
+  ///
   Map<String, dynamic> toFirebase() => <String, dynamic>{
     'providerId': providerId,
     'uid': uid,
@@ -74,20 +80,26 @@ class User extends HiveObject {
     'photoUrl': photoUrl,
   };
 
+  ///
   bool hasImage() =>
-    isNotEmpty && (this.photoUrl?.isNotEmpty ?? false);
+    isNotEmpty && (photoUrl?.isNotEmpty ?? false);
 
+  ///
   @override
   int get hashCode => 
-    '${this.providerId}-${this.uid}'.hashCode;
+    '$providerId-$uid'.hashCode;
+
+  ///
   @override
   operator ==(Object obj) => 
     obj is User 
-    && obj.providerId == this.providerId 
-    && obj.uid == this.uid;
+    && obj.providerId == providerId 
+    && obj.uid == uid;
+
+  ///
   @override
   String toString() =>
-    this.isEmpty
+    isEmpty
     ? 'Неавторизованный пользователь'
-    : '${this.displayName} (${this.email})';
+    : '$displayName ($email)';
 }

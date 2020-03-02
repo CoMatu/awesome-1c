@@ -56,9 +56,9 @@ class _ThemeTile extends StatelessWidget {
     Consumer<BlocHolder>(
       builder: (BuildContext context, BlocHolder bloc, _) =>
         ListTile(
-          title: Text(this.title), 
+          title: Text(title), 
           onTap: () =>
-            bloc?.appBloc?.add(ChangeAppTheme(this.appTheme)),
+            bloc?.appBloc?.add(ChangeAppTheme(appTheme)),
         ),    
     );
 }

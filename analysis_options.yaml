@@ -1,3 +1,5 @@
+# https://dart.dev/guides/language/analysis-options
+
 include: package:pedantic/analysis_options.yaml
 #include: package:effective_dart/analysis_options.yaml
 
@@ -5,19 +7,38 @@ analyzer:
   exclude:
     - 'example/**'
     - 'build/**'
+    - 'lib/*.g.dart'
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
-    
+  errors:
+    todo: info
+    unsafe_html: warning
 
+# https://dart-lang.github.io/linter/lints/
 linter:
   rules:
-    unnecessary_new: false
-    unnecessary_this: false
+    #false
     public_member_api_docs: false
-    avoid_shadowing_type_parameters: false
     avoid_types_on_closure_parameters: false
     omit_local_variable_types: false
+
+    # true
+    unnecessary_const: true
+    avoid_shadowing_type_parameters: true
+    prefer_final_fields: true
+    prefer_final_in_for_each: true
+    avoid_relative_lib_imports: true
+    avoid_print: true
+    unsafe_html: true
+    avoid_slow_async_io: true
+    avoid_types_as_parameter_names: true
+    prefer_void_to_null: true
+    avoid_empty_else: true
+    unnecessary_new: true
+    unnecessary_this: true
+    prefer_const_declarations: true
+    prefer_const_constructors: true
     await_only_futures: true
     avoid_void_async: true
     camel_case_types: true

@@ -18,8 +18,8 @@ class ItemWidget extends StatelessWidget {
     ItemWidgetMode mode,
     Item item,
   }) 
-    : this.mode = mode ?? ItemWidgetMode.unknown
-    , this.item = item;
+    : mode = mode ?? ItemWidgetMode.unknown
+    , item = item;
   
   @override
   Widget build(BuildContext context) =>
@@ -34,26 +34,26 @@ class ItemWidget extends StatelessWidget {
               child: Icon(Icons.error_outline, size: 128,),
             )
             : Padding(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Provider<Item>.value(
                 value: item,
                 child: Form(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                           child: Placeholder(),
                         ),
-                        Expanded(
+                        const Expanded(
                           flex: 1,
                           child: Placeholder(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                           child: Placeholder(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                           child: Placeholder(),
                         ),
@@ -67,8 +67,13 @@ class ItemWidget extends StatelessWidget {
     );
 }
 
+/*
 class _ItemWidgetTitle extends StatelessWidget {
+
+  const _ItemWidgetTitle();
+
   @override
   Widget build(BuildContext context) =>
-    SizedBox();
+    const SizedBox();
 }
+*/
