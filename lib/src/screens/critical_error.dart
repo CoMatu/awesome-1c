@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 /// Экран критической ошибки приложения
 class CriticalErrorScreen extends StatelessWidget {
   static const String route = '/error';
+  
+  const CriticalErrorScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>

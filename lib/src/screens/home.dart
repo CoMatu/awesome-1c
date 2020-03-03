@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 class HomeScreen extends StatefulWidget {
   static const String route = '/home';
 
-  const HomeScreen();
+  const HomeScreen({Key key}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -36,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
       searchController: _textEditingController,
       createButtonCallback: () =>
         Provider.of<BlocHolder>(context)?.appBloc?.add(const HandleItemSelection()),
-      child: ItemsListWidget(),
-      extraChild: Center(
+      child: const ItemsListWidget(),
+      extraChild: const Center(
         child: ItemWidget(),
       ),
     );

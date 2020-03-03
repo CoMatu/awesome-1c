@@ -14,8 +14,7 @@ class LogStorageHTML implements LogStorage {
   html.Console _console;
 
   ///
-  LogStorageHTML({String template})
-    : template = template;
+  LogStorageHTML({this.template});
 
   @override
   void init() {

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class NotFoundScreen extends StatelessWidget {
   static const String route = '/notfound';
 
+  const NotFoundScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) =>
     PlugScaffold(

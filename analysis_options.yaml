@@ -7,23 +7,43 @@ analyzer:
   exclude:
     - 'example/**'
     - 'build/**'
-    - 'lib/*.g.dart'
+    - '**.g.dart'
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
   errors:
     todo: info
     unsafe_html: warning
+    avoid_relative_lib_imports: error
+    avoid_slow_async_io: error
+    avoid_types_as_parameter_names: error
+    cancel_subscriptions: error
+    close_sinks: error
+    valid_regexps: error
+    no_logic_in_create_state: warning
 
 # https://dart-lang.github.io/linter/lints/
 linter:
   rules:
     #false
-    public_member_api_docs: false
-    avoid_types_on_closure_parameters: false
+    public_member_api_docs: false # Only for package
+    avoid_types_on_closure_parameters: false # Not as redundant as helpful and speaking
     omit_local_variable_types: false
+    prefer_relative_imports: false
+    lines_longer_than_80_chars: false
 
     # true
+    valid_regexps: true
+    use_key_in_widget_constructors: true
+    unrelated_type_equality_checks: true
+    no_logic_in_create_state: true
+    no_duplicate_case_values: true
+    unnecessary_lambdas: true
+    prefer_if_null_operators: true
+    prefer_initializing_formals: true
+    type_annotate_public_apis: true
+    avoid_equals_and_hash_code_on_mutable_classes: true
+    prefer_mixin: true
     unnecessary_const: true
     avoid_shadowing_type_parameters: true
     prefer_final_fields: true

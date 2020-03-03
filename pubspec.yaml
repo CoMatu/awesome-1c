@@ -52,10 +52,10 @@ dependencies:
   #encrypt 4.0.0
   #args 1.5.3
   #xml 3.7.0
-  pedantic: any
 
 
 dev_dependencies:
+  pedantic: any
   effective_dart: any
   json_serializable: any
   #freezed: any

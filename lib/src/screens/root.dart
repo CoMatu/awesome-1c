@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 /// Пустой экран
 class RootScreen extends StatelessWidget {
-  static const String route = '/';  
+  static const String route = '/';
+
+  const RootScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) =>
     PlugScaffold(

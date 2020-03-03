@@ -10,7 +10,10 @@ import 'package:awesome1c/src/bloc/bloc.dart';
 
 /// Экран настроек
 class SettingsScreen extends StatefulWidget {
-  static const String route = '/settings';  
+  static const String route = '/settings';
+
+  const SettingsScreen({Key key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _SettingsScreenState();
 }

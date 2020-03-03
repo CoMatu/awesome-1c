@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 /// Экран авторизации
 class AuthorizeScreen extends StatelessWidget {
   static const String route = '/authorize';
+  
+  const AuthorizeScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>

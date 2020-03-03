@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class ItemsListWidget extends StatelessWidget {
   
+  const ItemsListWidget({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) =>
     ListView.builder(

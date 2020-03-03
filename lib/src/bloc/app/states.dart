@@ -10,7 +10,7 @@ abstract class AppState {
 }
 
 /// Класс отмечающий состояния как влияющие на автороутинг
-abstract class AppRoutingState {}
+mixin AppRoutingState {}
 
 /// Начальное состояние приложения
 class InitialAppState extends AppState with AppRoutingState {}
@@ -27,7 +27,7 @@ class AppThemeChangedState extends AppState {
 
 
 ///
-abstract class AuthorizedState {}
+mixin AuthorizedState {}
 
 ///
 class Authorized extends AppState with AuthorizedState, AppRoutingState {
@@ -45,7 +45,7 @@ class NotAuthorized extends AppState with AuthorizedState, AppRoutingState {
 
 
 ///
-abstract class ItemState {}
+mixin ItemState {}
 
 ///
 class CreateItem extends AppState with ItemState {

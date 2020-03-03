@@ -1,10 +1,11 @@
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
+
 import 'package:awesome1c/src/models/user.dart';
 import 'package:hive/hive.dart';
 
-part 'item.g.dart';
-
 ///
-@HiveType(typeId: 1, adapterName: 'ItemAdapter')
+//part 'item.g.dart';
+//@HiveType(typeId: 1, adapterName: 'ItemAdapter')
 class Item extends HiveObject {
   
   ///
@@ -145,6 +146,67 @@ class Item extends HiveObject {
 
   ///
   @override
-  operator ==(Object obj) => 
+  bool operator ==(Object obj) => 
     obj is Item && obj.uid == uid;
+}
+
+
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+class ItemAdapter extends TypeAdapter<Item> {
+  @override
+  final int typeId = 1;
+
+  @override
+  Item read(BinaryReader reader) {
+    var numOfFields = reader.readByte();
+    var fields = <int, dynamic>{
+      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Item(
+      uid: fields[0] as String,
+      created: fields[1] as DateTime,
+      updated: fields[2] as DateTime,
+      isDeleted: fields[3] as bool,
+      isApproved: fields[4] as bool,
+      lang: fields[5] as String,
+      title: fields[6] as String,
+      description: fields[7] as String,
+      user: fields[8] as User,
+      url: fields[9] as String,
+      icon: fields[10] as String,
+      additional: fields[11] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Item obj) {
+    writer
+      ..writeByte(12)
+      ..writeByte(0)
+      ..write(obj.uid)
+      ..writeByte(1)
+      ..write(obj.created)
+      ..writeByte(2)
+      ..write(obj.updated)
+      ..writeByte(3)
+      ..write(obj.isDeleted)
+      ..writeByte(4)
+      ..write(obj.isApproved)
+      ..writeByte(5)
+      ..write(obj.lang)
+      ..writeByte(6)
+      ..write(obj.title)
+      ..writeByte(7)
+      ..write(obj.description)
+      ..writeByte(8)
+      ..write(obj.user)
+      ..writeByte(9)
+      ..write(obj.url)
+      ..writeByte(10)
+      ..write(obj.icon)
+      ..writeByte(11)
+      ..write(obj.additional);
+  }
 }

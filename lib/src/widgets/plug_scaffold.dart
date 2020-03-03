@@ -67,7 +67,7 @@ class _PlugScaffoldState extends State<PlugScaffold> {
                 ),
             ),
           )
-        : Scaffold(
+        : const Scaffold(
           body: SafeArea(
             child: LowResolution(),
           ),
@@ -307,7 +307,6 @@ class _AppBarSearchController {
   
   final TextEditingController searchController;
 
-  _AppBarSearchController.fromTextEditingController(TextEditingController searchController)
-    : isEnabled = searchController != null && searchController is TextEditingController
-    , searchController = searchController;
+  _AppBarSearchController.fromTextEditingController(this.searchController)
+    : isEnabled = searchController != null && searchController is TextEditingController;
 }

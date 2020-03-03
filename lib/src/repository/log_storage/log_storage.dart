@@ -31,10 +31,8 @@ class LogMessage {
   final dynamic message;
   final LogLevel level;
   String get prefix => _prefixFromLogLevel();
-  const LogMessage({DateTime date, dynamic message, LogLevel level})
+  const LogMessage({this.date, this.message, LogLevel level})
     : assert(date is DateTime && message != null)
-    , date = date
-    , message = message
     , level = level ?? LogLevel.vvvvvv;
   
   String _prefixFromLogLevel() {

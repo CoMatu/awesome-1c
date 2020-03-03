@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
+
 import 'dart:async';
 import 'package:awesome1c/src/repository/log_storage/log_storage.dart';
 
@@ -45,7 +47,7 @@ class Log {
   /// close
   Future<void> close() =>
     _controller.close()
-    .whenComplete(() => _logStorage.dispose());
+    .whenComplete(_logStorage.dispose);
 
   // Семафор - итератор задач
   Stream<void> _iterateLog(StreamIterator<LogMessage> iterator, LogWriter writer) {
@@ -75,7 +77,7 @@ class Log {
   @override
   int get hashCode => 0;
   @override
-  operator ==(Object obj) => obj is Log;
+  bool operator ==(Object obj) => obj is Log;
   @override
   String toString() => 'Instance of \'Log\'';
 

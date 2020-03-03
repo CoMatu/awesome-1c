@@ -12,8 +12,7 @@ class LogStorageStub implements LogStorage {
   final String template;
 
   ///
-  const LogStorageStub({String template})
-    : template = template;
+  const LogStorageStub({this.template});
 
   /// Init
   @override

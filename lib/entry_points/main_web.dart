@@ -1,5 +1,6 @@
 import 'package:awesome1c/src/app.dart' as app;
 
+/// Запуск для веба
 void runner() =>
   main();
 

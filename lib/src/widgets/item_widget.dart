@@ -14,12 +14,13 @@ class ItemWidget extends StatelessWidget {
   final ItemWidgetMode mode;
   final Item item;
 
-  ItemWidget({
+  const ItemWidget({
     ItemWidgetMode mode,
-    Item item,
+    this.item,
+    Key key,
   }) 
     : mode = mode ?? ItemWidgetMode.unknown
-    , item = item;
+    , super(key: key);
   
   @override
   Widget build(BuildContext context) =>

@@ -25,11 +25,21 @@ class GlobalContext extends StatelessWidget {
   Widget build(BuildContext context) =>
     MultiProvider(
       key: const Key('GlobalContextProvider'),
-      providers: [
-        Provider<BlocHolder>(create: (_) => BlocHolder(), dispose: (_, BlocHolder bloc) => bloc.close(),),
-        Provider<AppNavigator>(create: (_) => AppNavigator(), dispose: (_, AppNavigator appNavigator) => appNavigator.dispose(),),
-        Provider<Platform>(create: (_) => Platform(),),
-        Provider<Log>(create: (_) => Log(),),
+      providers: <Provider>[
+        Provider<BlocHolder>(
+          create: (_) => BlocHolder(),
+          dispose: (_, BlocHolder bloc) => bloc.close(),
+        ),
+        Provider<AppNavigator>(
+          create: (_) => AppNavigator(), 
+          dispose: (_, AppNavigator appNavigator) => appNavigator.dispose(),
+        ),
+        Provider<Platform>(
+          create: (_) => Platform(),
+        ),
+        Provider<Log>(
+          create: (_) => Log(),
+        ),
       ],
       child: const App(key: Key('App')),
     );
@@ -50,14 +60,14 @@ class App extends StatelessWidget {
           .forEach(_appNavigator.routeFromState);
     return StreamBuilder<AppThemeChangedState>(
       stream: _appBloc.whereState<AppThemeChangedState>(),
-      builder: (BuildContext context, AsyncSnapshot<AppThemeChangedState> snapshot) =>
+      builder: (BuildContext ctx, AsyncSnapshot<AppThemeChangedState> snap) =>
         MaterialApp(
           key: const Key('MaterialApp'),
           navigatorKey: _appNavigator.navigatorKey,
           title: '1C:Awesome',
           initialRoute: '/',
           onGenerateRoute: _appNavigator.onGenerateRoute,
-          theme: snapshot?.data?.appTheme?.themeData ?? AppTheme.defaultThemeData,
+          theme: snap?.data?.appTheme?.themeData ?? AppTheme.defaultThemeData,
           //debugShowCheckedModeBanner: false,
         ),
     );
@@ -88,13 +98,13 @@ class AppNavigator {
   Route<void> _innerRouter(RouteSettings settings) {
     Widget _selectScreen(RouteSettings settings) {
       switch (settings.name) {
-        case RootScreen.route: return RootScreen();
+        case RootScreen.route: return const RootScreen();
         case HomeScreen.route: return const HomeScreen();
-        case LoadingScreen.route: return LoadingScreen();
-        case SettingsScreen.route: return SettingsScreen();
-        case CriticalErrorScreen.route: return CriticalErrorScreen();
-        case AuthorizeScreen.route: return AuthorizeScreen();
-        default: return NotFoundScreen();
+        case LoadingScreen.route: return const LoadingScreen();
+        case SettingsScreen.route: return const SettingsScreen();
+        case CriticalErrorScreen.route: return const CriticalErrorScreen();
+        case AuthorizeScreen.route: return const AuthorizeScreen();
+        default: return const NotFoundScreen();
       }
     }
     Route<void> _buildMaterialPageRoute(Widget screen, [RouteSettings settings, bool maintainState = true, bool fullscreenDialog = false]) =>

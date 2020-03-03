@@ -1,5 +1,6 @@
 import 'package:awesome1c/src/app.dart' as app;
 
+/// Запуск приложения как io
 void runner() =>
   main();
 

@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 
 /// Экран загрузки
 class LoadingScreen extends StatefulWidget {
-  static const String route = '/loading';  
+  static const String route = '/loading';
+
+  const LoadingScreen({Key key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _LoadingScreenState();
 }

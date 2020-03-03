@@ -15,8 +15,7 @@ class LogStorageIO implements LogStorage {
   io.Stdout _console;
 
   ///
-  LogStorageIO({String template})
-    : template = template;
+  LogStorageIO({this.template});
 
   /// Init
   @override
