@@ -17,7 +17,7 @@ class LogStorageStub implements LogStorage {
 
   /// Init
   @override
-  FutureOr<void> init() => null;
+  void init() => null;
 
   /// Dispose
   @override

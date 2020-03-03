@@ -44,7 +44,8 @@ class Log {
 
   /// close
   Future<void> close() =>
-    _controller.close();
+    _controller.close()
+    .whenComplete(() => _logStorage.dispose());
 
   // Семафор - итератор задач
   Stream<void> _iterateLog(StreamIterator<LogMessage> iterator, LogWriter writer) {
@@ -82,6 +83,7 @@ class Log {
   static final Log _singleton = Log._internal();
   factory Log() => _singleton;
   Log._internal() {
+    _logStorage.init();
     _startLogIterrator();
   }
   // SINGLETON -

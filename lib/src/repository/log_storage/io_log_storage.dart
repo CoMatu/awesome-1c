@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:async' show FutureOr;
-//import 'dart:io' as io;
+import 'dart:io' as io;
 import 'package:awesome1c/src/repository/log_storage/log_storage.dart';
 
 ///
@@ -12,7 +12,7 @@ class LogStorageIO implements LogStorage {
   @override
   final String template;
 
-  //io.Stdout _console;
+  io.Stdout _console;
 
   ///
   LogStorageIO({String template})
@@ -20,18 +20,16 @@ class LogStorageIO implements LogStorage {
 
   /// Init
   @override
-  FutureOr<void> init() {
-    //_console = io.stdout;   
+  void init() {
+    _console = io.stdout;   
   }
 
   /// Dispose
   @override
   FutureOr<void> dispose() async {
-    /*
     await _console.flush();
     await _console.close();
     _console = null;
-    */
   }
 
   /// Запись в хранилище
@@ -39,8 +37,8 @@ class LogStorageIO implements LogStorage {
     assert((){
       final String _message = _formatMessage(logMessage);
       if (_message is! String) return true;
-      //_console.writeln(_message);
-      print(_message);
+      _console.writeln(_message);
+      //print(_message);
       return true;
     }());
     return null;

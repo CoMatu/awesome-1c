@@ -12,6 +12,8 @@ enum BuildMode {
 }
 
 class Platform {
+  /// TODO: Отслеживание ресайза
+
   final HostPlatform _hostPlatform;
   final BuildMode buildMode;
   HostPlatformType get type => _hostPlatform.type ?? HostPlatformType.unknown;

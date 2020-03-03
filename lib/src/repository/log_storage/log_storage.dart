@@ -15,7 +15,7 @@ abstract class LogStorage {
     buildLogStorage(template: template);
 
   /// Init
-  FutureOr<void> init();
+  void init();
 
   /// Dispose
   FutureOr<void> dispose();

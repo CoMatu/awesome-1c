@@ -18,7 +18,7 @@ class LogStorageHTML implements LogStorage {
     : template = template;
 
   @override
-  FutureOr<void> init() {
+  void init() {
     _console = html.window.console;    
   }
 

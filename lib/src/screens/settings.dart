@@ -4,7 +4,9 @@ import 'package:awesome1c/src/widgets/plug_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../bloc/bloc.dart';
+import 'package:awesome1c/src/bloc/bloc.dart';
+
+/// TODO: выводить номер версии приложения
 
 /// Экран настроек
 class SettingsScreen extends StatefulWidget {

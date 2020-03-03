@@ -11,6 +11,7 @@ enum _AppThemeOptions {
 }
 
 class AppTheme {
+  /// TODO: фоновая картинка в стиле вотсапа
   static const String fontFamily = 'JetBrainsMono';
   //static const TextTheme textTheme = TextTheme();
 
