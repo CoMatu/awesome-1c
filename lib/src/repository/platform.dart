@@ -4,6 +4,7 @@ import 'package:awesome1c/src/repository/host_platform/stub_host_platform.dart'
   // ignore: uri_does_not_exist
   if (dart.library.io) 'package:awesome1c/src/repository/host_platform/io_host_platform.dart';
 
+
 // Перечисление режимов запуска приложения
 enum BuildMode {
   release
@@ -12,8 +13,6 @@ enum BuildMode {
 }
 
 class Platform {
-  /// TODO: Отслеживание ресайза
-
   final HostPlatform _hostPlatform;
   final BuildMode buildMode;
   HostPlatformType get type => _hostPlatform.type ?? HostPlatformType.unknown;
