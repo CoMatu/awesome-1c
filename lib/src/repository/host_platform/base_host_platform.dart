@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 enum HostPlatformType {
   web,
   io,
@@ -15,9 +17,10 @@ enum OperatingSystem {
 }
 
 class HostPlatform {
-  final HostPlatformType type = HostPlatformType.unknown;
+  final HostPlatformType type = kIsWeb ? HostPlatformType.web : HostPlatformType.io;
   final OperatingSystem operatingSystem = OperatingSystem.unknown;
   final String version = 'unknown';
   final num versionNumber = .0;
   final String locale = 'en';
 }
+
