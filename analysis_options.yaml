@@ -34,6 +34,10 @@ linter:
     lines_longer_than_80_chars: false
 
     # true
+    avoid_catching_errors: true
+    avoid_catches_without_on_clauses: true
+    empty_catches: true
+    use_rethrow_when_possible: true
     avoid_returning_null_for_future: true
     valid_regexps: true
     use_key_in_widget_constructors: true
