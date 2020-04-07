@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
 import 'dart:async';
-import 'package:awesome1c/src/repository/log_storage/log_storage.dart';
+import 'log_storage/log_storage.dart';
 
 typedef LogWriter = FutureOr<void> Function(LogMessage logMessage);
 
