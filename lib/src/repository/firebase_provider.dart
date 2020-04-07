@@ -1,9 +1,9 @@
-import 'package:awesome1c/src/models/user.dart';
-import 'package:awesome1c/src/repository/logger.dart';
 import 'package:firebase_core/firebase_core.dart' as fb_core;
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:google_sign_in/google_sign_in.dart' as google_sign_in;
 import 'package:cloud_firestore/cloud_firestore.dart' as fb_store;
+import '../models/user.dart';
+import 'logger.dart';
 
 class FirebaseProvider {
   final Log _log = Log();

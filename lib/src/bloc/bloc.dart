@@ -1,6 +1,7 @@
-import 'package:awesome1c/src/bloc/app/bloc.dart';
-import 'package:awesome1c/src/models/user.dart';
-export 'package:awesome1c/src/bloc/app/bloc.dart';
+import '../models/user.dart';
+import 'app/bloc.dart';
+
+export 'app/bloc.dart';
 
 class BlocHolder {
   final AppBloc appBloc = AppBloc();

@@ -1,7 +1,7 @@
-export 'package:awesome1c/src/screens/root.dart';
-export 'package:awesome1c/src/screens/home.dart';
-export 'package:awesome1c/src/screens/loading.dart';
-export 'package:awesome1c/src/screens/settings.dart';
-export 'package:awesome1c/src/screens/critical_error.dart';
-export 'package:awesome1c/src/screens/not_found.dart';
-export 'package:awesome1c/src/screens/authorize.dart';
+export 'authorize.dart';
+export 'critical_error.dart';
+export 'home.dart';
+export 'loading.dart';
+export 'not_found.dart';
+export 'root.dart';
+export 'settings.dart';

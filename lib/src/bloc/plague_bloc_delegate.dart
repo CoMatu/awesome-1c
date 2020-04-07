@@ -1,5 +1,5 @@
-import 'package:awesome1c/src/repository/logger.dart';
 import 'package:bloc/bloc.dart';
+import '../repository/logger.dart';
 
 class PlagueBlocDelegate extends BlocDelegate {
   final Log _log = Log();

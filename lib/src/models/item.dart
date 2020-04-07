@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
-import 'package:awesome1c/src/models/user.dart';
 import 'package:hive/hive.dart';
+import 'user.dart';
 
 ///
 //part 'item.g.dart';

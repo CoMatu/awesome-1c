@@ -1,8 +1,8 @@
-import 'package:awesome1c/src/repository/host_platform/stub_host_platform.dart'
+import 'host_platform/stub_host_platform.dart'
   // ignore: uri_does_not_exist
-  if (dart.library.html) 'package:awesome1c/src/repository/host_platform/web_host_platform.dart'
+  if (dart.library.html) 'host_platform/web_host_platform.dart'
   // ignore: uri_does_not_exist
-  if (dart.library.io) 'package:awesome1c/src/repository/host_platform/io_host_platform.dart';
+  if (dart.library.io) 'host_platform/io_host_platform.dart';
 
 
 // Перечисление режимов запуска приложения

@@ -1,7 +1,7 @@
 import 'dart:math' as math show min;
-import 'package:awesome1c/src/models/item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../models/item.dart';
 
 enum ItemWidgetMode {
   create,

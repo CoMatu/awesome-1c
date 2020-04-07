@@ -1,6 +1,7 @@
 import 'dart:html' as html show window;
-import 'package:awesome1c/src/repository/host_platform/base_host_platform.dart';
-export 'package:awesome1c/src/repository/host_platform/base_host_platform.dart';
+import 'base_host_platform.dart';
+
+export 'base_host_platform.dart';
 
 
 HostPlatform getHostPlatform() => WebHostPlatform();

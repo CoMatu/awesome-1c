@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'package:pedantic/pedantic.dart' show unawaited;
-import 'package:awesome1c/src/models/item.dart';
-import 'package:awesome1c/src/models/user.dart';
-import 'package:awesome1c/src/repository/firebase_provider.dart';
-import 'package:awesome1c/src/repository/hive_provider.dart';
-import 'package:awesome1c/src/repository/logger.dart';
 import 'package:bloc/bloc.dart';
-import 'package:awesome1c/src/bloc/app/events.dart';
-import 'package:awesome1c/src/bloc/app/states.dart';
 import 'package:rxdart/rxdart.dart';
-export 'package:awesome1c/src/bloc/app/events.dart';
-export 'package:awesome1c/src/bloc/app/states.dart';
+import '../../models/item.dart';
+import '../../models/user.dart';
+import '../../repository/firebase_provider.dart';
+import '../../repository/hive_provider.dart';
+import '../../repository/logger.dart';
+import 'events.dart';
+import 'states.dart';
+
+export 'events.dart';
+export 'states.dart';
 
 
 /// BLoC приложения

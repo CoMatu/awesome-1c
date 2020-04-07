@@ -1,7 +1,7 @@
-import 'package:awesome1c/src/bloc/bloc.dart';
-import 'package:awesome1c/src/widgets/plug_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../bloc/bloc.dart';
+import '../widgets/plug_scaffold.dart';
 
 /// Экран авторизации
 class AuthorizeScreen extends StatelessWidget {

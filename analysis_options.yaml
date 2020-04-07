@@ -14,7 +14,9 @@ analyzer:
     implicit-dynamic: false
   errors:
     todo: info
+    directives_ordering: info
     unsafe_html: warning
+    prefer_relative_imports: warning
     avoid_relative_lib_imports: error
     avoid_slow_async_io: error
     avoid_types_as_parameter_names: error
@@ -30,10 +32,10 @@ linter:
     public_member_api_docs: false # Only for package
     avoid_types_on_closure_parameters: false # Not as redundant as helpful and speaking
     omit_local_variable_types: false
-    prefer_relative_imports: false
     lines_longer_than_80_chars: false
 
     # true
+    prefer_relative_imports: true
     avoid_catching_errors: true
     avoid_catches_without_on_clauses: true
     empty_catches: true

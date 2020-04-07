@@ -1,10 +1,9 @@
-
-import 'package:awesome1c/src/bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:awesome1c/src/widgets/item_widget.dart';
-import 'package:awesome1c/src/widgets/items_list_widget.dart';
-import 'package:awesome1c/src/widgets/plug_scaffold.dart';
 import 'package:provider/provider.dart';
+import '../bloc/bloc.dart';
+import '../widgets/item_widget.dart';
+import '../widgets/items_list_widget.dart';
+import '../widgets/plug_scaffold.dart';
 
 /// Домашний экран
 class HomeScreen extends StatefulWidget {

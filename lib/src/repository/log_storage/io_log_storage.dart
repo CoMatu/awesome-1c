@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 import 'dart:async' show FutureOr;
 import 'dart:io' as io;
-import 'package:awesome1c/src/repository/log_storage/log_storage.dart';
+import 'log_storage.dart';
 
 ///
 LogStorage buildLogStorage({String template}) => LogStorageIO(template: template);

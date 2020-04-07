@@ -1,9 +1,9 @@
 import 'dart:async' show FutureOr;
-import 'package:awesome1c/src/repository/log_storage/stub_log_storage.dart'
+import 'stub_log_storage.dart'
   // ignore: uri_does_not_exist
-  if (dart.library.html) 'package:awesome1c/src/repository/log_storage/web_log_storage.dart'
+  if (dart.library.html) 'web_log_storage.dart'
   // ignore: uri_does_not_exist
-  if (dart.library.io) 'package:awesome1c/src/repository/log_storage/io_log_storage.dart';
+  if (dart.library.io) 'io_log_storage.dart';
 
 ///
 abstract class LogStorage {

@@ -1,6 +1,6 @@
-import 'package:awesome1c/src/models/app_theme.dart';
-import 'package:awesome1c/src/models/item.dart';
-import 'package:awesome1c/src/models/user.dart';
+import '../../models/app_theme.dart';
+import '../../models/item.dart';
+import '../../models/user.dart';
 
 /* EVENTS */
 

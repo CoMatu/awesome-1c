@@ -1,6 +1,6 @@
 import 'dart:async' show FutureOr;
 import 'dart:html' as html show window, Console;
-import 'package:awesome1c/src/repository/log_storage/log_storage.dart';
+import 'log_storage.dart';
 
 ///
 LogStorage buildLogStorage({String template}) => LogStorageHTML(template: template);

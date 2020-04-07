@@ -1,9 +1,9 @@
-import 'package:awesome1c/src/bloc/bloc.dart';
-import 'package:awesome1c/src/models/user.dart';
-import 'package:awesome1c/src/screens/screens.dart';
-import 'package:awesome1c/src/widgets/low_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../bloc/bloc.dart';
+import '../models/user.dart';
+import '../screens/screens.dart';
+import 'low_resolution.dart';
 
 @immutable
 class PlugScaffold extends StatefulWidget {

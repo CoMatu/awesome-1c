@@ -1,12 +1,12 @@
-import 'package:awesome1c/src/bloc/plague_bloc_delegate.dart';
-import 'package:awesome1c/src/models/app_theme.dart';
-import 'package:awesome1c/src/repository/logger.dart';
-import 'package:awesome1c/src/repository/platform.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:awesome1c/src/bloc/bloc.dart';
-import 'package:awesome1c/src/screens/screens.dart';
+import 'bloc/bloc.dart';
+import 'bloc/plague_bloc_delegate.dart';
+import 'models/app_theme.dart';
+import 'repository/logger.dart';
+import 'repository/platform.dart';
+import 'screens/screens.dart';
 
 /// Запуск приложения
 void start() {

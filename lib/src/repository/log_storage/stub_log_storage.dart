@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:async' show FutureOr;
-import 'package:awesome1c/src/repository/log_storage/log_storage.dart';
+import 'log_storage.dart';
 
 ///
 LogStorage buildLogStorage({String template}) => LogStorageStub(template: template);

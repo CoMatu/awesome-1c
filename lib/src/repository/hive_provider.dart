@@ -1,8 +1,7 @@
-
-import 'package:awesome1c/src/models/item.dart';
-import 'package:awesome1c/src/models/user.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../models/item.dart';
+import '../models/user.dart';
 
 class HiveProvider {
   //final Log _log = Log();

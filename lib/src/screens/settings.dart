@@ -1,10 +1,8 @@
-
-import 'package:awesome1c/src/models/app_theme.dart';
-import 'package:awesome1c/src/widgets/plug_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'package:awesome1c/src/bloc/bloc.dart';
+import '../bloc/bloc.dart';
+import '../models/app_theme.dart';
+import '../widgets/plug_scaffold.dart';
 
 /// TODO: выводить номер версии приложения
 
