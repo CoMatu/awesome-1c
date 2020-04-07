@@ -7,10 +7,15 @@ export 'base_host_platform.dart';
 HostPlatform getHostPlatform() => WebHostPlatform();
 
 class WebHostPlatform implements HostPlatform {
+  @override
   final HostPlatformType type = HostPlatformType.web;
+  @override
   final OperatingSystem operatingSystem = _getOS();
+  @override
   final String version = _getVersion();
+  @override
   num get versionNumber => num.tryParse(version?.split(' ')?.first ?? '0.0') ?? .0;
+  @override
   final String locale = _getLocale();
   static OperatingSystem _getOS() {
     final String appVersion = html.window?.navigator?.appVersion?.toLowerCase() ?? '';

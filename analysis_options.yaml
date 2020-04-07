@@ -35,6 +35,8 @@ linter:
     lines_longer_than_80_chars: false
 
     # true
+    always_require_non_null_named_parameters: true
+    annotate_overrides: true
     prefer_relative_imports: true
     avoid_catching_errors: true
     avoid_catches_without_on_clauses: true

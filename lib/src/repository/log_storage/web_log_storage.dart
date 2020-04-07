@@ -27,6 +27,7 @@ class LogStorageHTML implements LogStorage {
   }
 
   /// Запись в хранилище
+  @override
   FutureOr<void> store(LogMessage logMessage) {
     assert((){
       final String _message = _formatMessage(logMessage);

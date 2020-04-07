@@ -1,6 +1,6 @@
 @echo off
 @echo.
-@call flutter channel dev
+@call flutter channel beta
 @echo.
 @call flutter upgrade
 @echo.

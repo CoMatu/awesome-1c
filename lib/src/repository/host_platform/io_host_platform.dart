@@ -6,10 +6,15 @@ export 'base_host_platform.dart';
 HostPlatform getHostPlatform() => IOHostPlatform();
 
 class IOHostPlatform implements HostPlatform {
+  @override
   final HostPlatformType type = HostPlatformType.io;
+  @override
   final OperatingSystem operatingSystem = _getOS();
+  @override
   final String version = _getVersion();
+  @override
   num get versionNumber => num.tryParse(version?.split(' ')?.first ?? '0.0') ?? .0;
+  @override
   final String locale = _getLocale();
   static OperatingSystem _getOS() {
     if (io.Platform.isFuchsia) {

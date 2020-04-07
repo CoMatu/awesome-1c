@@ -1,4 +1,6 @@
 import 'dart:async' show FutureOr;
+import 'package:flutter/cupertino.dart';
+
 import 'stub_log_storage.dart'
   // ignore: uri_does_not_exist
   if (dart.library.html) 'web_log_storage.dart'
@@ -31,7 +33,7 @@ class LogMessage {
   final dynamic message;
   final LogLevel level;
   String get prefix => _prefixFromLogLevel();
-  const LogMessage({this.date, this.message, LogLevel level})
+  const LogMessage({this.date, @required this.message, LogLevel level})
     : assert(date is DateTime && message != null)
     , level = level ?? LogLevel.vvvvvv;
   
