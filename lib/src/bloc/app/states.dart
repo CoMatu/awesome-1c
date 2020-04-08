@@ -26,6 +26,13 @@ class AppThemeChangedState extends AppState {
 }
 
 
+/// Смена языка
+class LocalizationState extends AppState {
+  final String languageCode;
+  const LocalizationState(this.languageCode);
+}
+
+
 ///
 mixin AuthorizedState {}
 

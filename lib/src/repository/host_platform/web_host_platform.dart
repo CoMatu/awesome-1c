@@ -1,4 +1,4 @@
-import 'dart:html' as html show window;
+import 'dart:html' as html show window, document;
 import 'base_host_platform.dart';
 
 export 'base_host_platform.dart';
@@ -38,6 +38,18 @@ class WebHostPlatform implements HostPlatform {
     html.window.navigator.appVersion ?? '0.0';
   static String _getLocale() =>
     html.window.navigator.language ?? 'en';
+  
+  @override
+  void setThemeColor(String color) {
+    html.document.querySelector('meta[name=theme-color]').attributes['content'] = color;
+  }
+
+  @override
+  void setBackgroundColor(String color) {
+    html.document.body.style
+      ..background = color
+      ..backgroundColor = color;
+  }
 }
 
 

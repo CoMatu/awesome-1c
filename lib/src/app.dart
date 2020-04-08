@@ -1,9 +1,11 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'bloc/bloc.dart';
 import 'bloc/plague_bloc_delegate.dart';
 import 'models/app_theme.dart';
+import 'repository/localizer.dart';
 import 'repository/logger.dart';
 import 'repository/platform.dart';
 import 'screens/screens.dart';
@@ -58,17 +60,32 @@ class App extends StatelessWidget {
         ..add(const InitApp())
         ..whereState<AppRoutingState>()
           .forEach(_appNavigator.routeFromState);
-    return StreamBuilder<AppThemeChangedState>(
-      stream: _appBloc.whereState<AppThemeChangedState>(),
-      builder: (BuildContext ctx, AsyncSnapshot<AppThemeChangedState> snap) =>
-        MaterialApp(
-          key: const Key('MaterialApp'),
-          navigatorKey: _appNavigator.navigatorKey,
-          title: '1C:Awesome',
-          initialRoute: '/',
-          onGenerateRoute: _appNavigator.onGenerateRoute,
-          theme: snap?.data?.appTheme?.themeData ?? AppTheme.defaultThemeData,
-          //debugShowCheckedModeBanner: false,
+    // Обновление локали
+    return StreamBuilder<LocalizationState>(
+      initialData: LocalizationState(Localizer.defaultLocale.languageCode),
+      stream: _appBloc.whereState<LocalizationState>(),
+      builder: (BuildContext context, AsyncSnapshot<LocalizationState> localeSnapshot) =>
+        // Изменение темы оформления
+        StreamBuilder<AppThemeChangedState>(
+          initialData: AppThemeChangedState(AppTheme.vanilla()),
+          stream: _appBloc.whereState<AppThemeChangedState>(),
+          builder: (BuildContext ctx, AsyncSnapshot<AppThemeChangedState> themeSnapshot) =>
+            MaterialApp(
+              key: const Key('MaterialApp'),
+              navigatorKey: _appNavigator.navigatorKey,
+              title: '1C:Awesome',
+              initialRoute: '/',
+              onGenerateRoute: _appNavigator.onGenerateRoute,
+              theme: themeSnapshot?.data?.appTheme?.themeData ?? AppTheme.defaultThemeData,
+              locale: Locale(localeSnapshot?.data?.languageCode ?? 'en'),
+              //debugShowCheckedModeBanner: false,
+              supportedLocales: Localizer.supportedLocales,
+              localizationsDelegates: const <LocalizationsDelegate>[
+                LocalizerDelegate(),
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+            ),
         ),
     );
   }

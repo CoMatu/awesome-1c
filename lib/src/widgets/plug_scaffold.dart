@@ -42,37 +42,43 @@ class PlugScaffold extends StatefulWidget {
 class _PlugScaffoldState extends State<PlugScaffold> {
   @override
   Widget build(BuildContext context) =>
-    LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) =>
-        (constraints.maxWidth > widget.minWidth && constraints.maxHeight > widget.minHeight)
-        ? Provider<_AppBarSearchController>.value(
-          value: widget._searchController,
-          child: StreamBuilder<AuthorizedState>(
-            stream: Provider.of<BlocHolder>(context).appBloc.whereState<AuthorizedState>(),
-            builder: (BuildContext context, AsyncSnapshot<AuthorizedState> snapshot) =>
-              Scaffold(
-                appBar: (widget.showAppBar ?? true) ? _PlugScaffoldAppBar(title: widget.title,) : null,
-                body: SafeArea(
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: _PlugScaffoldContent(widget.child, widget.extraChild),
-                  ),
+    // Получение БЛоК'а
+    Consumer<BlocHolder>(
+      builder: (BuildContext context, BlocHolder blocHolder, Widget _) =>
+        // Адаптивная разметка
+        LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) =>
+            (constraints.maxWidth > widget.minWidth && constraints.maxHeight > widget.minHeight)
+            ? Provider<_AppBarSearchController>.value(
+              value: widget._searchController,
+              // Смена текущего пользователя
+              child: StreamBuilder<AuthorizedState>(
+                stream: blocHolder.appBloc.whereState<AuthorizedState>(),
+                builder: (BuildContext context, AsyncSnapshot<AuthorizedState> snapshot) =>
+                  Scaffold(
+                    appBar: (widget.showAppBar ?? true) ? _PlugScaffoldAppBar(title: widget.title,) : null,
+                    body: SafeArea(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: _PlugScaffoldContent(widget.child, widget.extraChild),
+                      ),
+                    ),
+                    drawer: (widget.showAppBar ?? true) ? _PlugScaffoldDrawer() : null,
+                    floatingActionButton: widget.createButtonCallback is VoidCallback
+                      ? FloatingActionButton(
+                        child: Icon(Icons.add),
+                        onPressed: widget.createButtonCallback,
+                      ) : null,
+                    ),
                 ),
-                drawer: (widget.showAppBar ?? true) ? _PlugScaffoldDrawer() : null,
-                floatingActionButton: widget.createButtonCallback is VoidCallback
-                  ? FloatingActionButton(
-                    child: Icon(Icons.add),
-                    onPressed: widget.createButtonCallback,
-                  ) : null,
-                ),
+              )
+            : const Scaffold(
+              body: SafeArea(
+                child: LowResolution(), // Предупреждение о низком разрешении экрана
+              ),
             ),
-          )
-        : const Scaffold(
-          body: SafeArea(
-            child: LowResolution(),
-          ),
         ),
-    );
+  );
 }
 
 //
@@ -116,7 +122,7 @@ class _PlugScaffoldAppBarState extends State<_PlugScaffoldAppBar> {
         ]
         : null,
     );
-  
+
   void _toogleSearchButton() =>
     setState(() {
       active = !active;
@@ -181,6 +187,11 @@ class _PlugScaffoldDrawer extends StatelessWidget {
             leading: const Icon(Icons.settings),
             title: const Text('Настройки'),
             onTap: () => Navigator.of(context)?.pushNamed(SettingsScreen.route),
+          ),
+          const ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Об авторе'),
+            onTap: null, /// TODO: Реализовать экран контактов
           ),
         ],
       ),

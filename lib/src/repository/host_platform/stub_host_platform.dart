@@ -16,4 +16,11 @@ class UnknownHostPlatform implements HostPlatform {
   final num versionNumber = .0;
   @override
   final String locale = 'en';
+
+  @override
+  void setThemeColor(String _) => null;
+
+  @override
+  void setBackgroundColor(String _) => null;
+  
 }

@@ -20,6 +20,12 @@ class ChangeAppTheme extends AppEvent {
   const ChangeAppTheme(this.appTheme);
 }
 
+/// Сменить язык
+class ChangeLocale extends AppEvent {
+  final String languageCode;
+  const ChangeLocale(this.languageCode);
+}
+
 /// Авторизоваться
 class SignIn extends AppEvent {
   const SignIn();

@@ -36,5 +36,11 @@ class IOHostPlatform implements HostPlatform {
     io.Platform.operatingSystemVersion;
   static String _getLocale() =>
     io.Platform.localeName ?? 'en';
+
+  @override
+  void setThemeColor(String _) => null;
+
+  @override
+  void setBackgroundColor(String _) => null;
 }
 

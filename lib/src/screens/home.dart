@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../bloc/bloc.dart';
+import '../repository/localizer.dart';
 import '../widgets/item_widget.dart';
 import '../widgets/items_list_widget.dart';
 import '../widgets/plug_scaffold.dart';
@@ -31,14 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) =>
-    PlugScaffold(
-      title: '1C:Awesome',
-      searchController: _textEditingController,
-      createButtonCallback: () =>
-        Provider.of<BlocHolder>(context)?.appBloc?.add(const HandleItemSelection()),
-      child: const ItemsListWidget(),
-      extraChild: const Center(
-        child: ItemWidget(),
-      ),
+    Consumer<BlocHolder>(
+      builder: (BuildContext context, BlocHolder blocHolder, Widget _) =>
+        PlugScaffold(
+          title: Localizer.of(context)['title'],
+          searchController: _textEditingController,
+          createButtonCallback: () => blocHolder?.appBloc?.add(const HandleItemSelection()),
+          child: const ItemsListWidget(),
+          extraChild: const Center(
+            child: ItemWidget(),
+          ),
+        ),
     );
 }

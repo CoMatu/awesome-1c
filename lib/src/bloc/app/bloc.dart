@@ -6,13 +6,14 @@ import '../../models/item.dart';
 import '../../models/user.dart';
 import '../../repository/firebase_provider.dart';
 import '../../repository/hive_provider.dart';
+import '../../repository/localizer.dart';
 import '../../repository/logger.dart';
+import '../../repository/platform.dart';
 import 'events.dart';
 import 'states.dart';
 
 export 'events.dart';
 export 'states.dart';
-
 
 /// BLoC приложения
 class AppBloc extends Bloc<AppEvent, AppState> {
@@ -25,6 +26,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   final Log _log = Log();
   final FirebaseProvider _firebaseProvider = FirebaseProvider();
   final HiveProvider _hiveProvider = HiveProvider();
+  final Platform _platform = Platform();
 
   Stream<T> whereState<T>() =>
     whereType<T>();
@@ -35,6 +37,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       yield* _initApp(event);
     } else if (event is ChangeAppTheme){
       yield* _changeAppTheme(event);
+    } else if (event is ChangeLocale){
+      yield* _changeLocale(event);
     } else if (event is SetAuthState) {
       yield* _setAuthState(event);
     } else if (event is SignIn) {
@@ -68,22 +72,44 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       _firebaseProvider.onAuthStateChanged.forEach((User user) => add(SetAuthState(user)))
     );
 
+    // Dictionaries
+    _log.vvv('Заполним словари локализации');
+    await Dictionaries.fill();
+    _log.vvvv('Словари локализации заполнены');
+
+    /// TODO: Получить локаль
+    
+    /// TODO: Получить тему
+
     yield InitializedAppState();
     _log.vvv('Приложение успешно инициализировано');
   }
 
+  ///
   @override
   Future<void> close() =>
     super.close();
 
   //
   Stream<AppState> _changeAppTheme(ChangeAppTheme event) async* {
-    /// TODO: смена цвета статус бара
-    /// менять цвет фона HTML на цвет AppBar'а
-    /// менять мета тэг <meta name="theme-color" content="#c2185b">
-
+    final String themeHexRepresentation = '#${event.appTheme?.themeData?.primaryColor?.value?.toRadixString(16)?.padLeft(8, '0')?.substring(2) ?? '2196f3'}';    
+    final String backgroundHexRepresentation = '#${event.appTheme.themeData?.backgroundColor?.value?.toRadixString(16)?.padLeft(8, '0')?.substring(2) ?? '90caf9'}';
+    _platform.hostPlatform
+      ..setThemeColor(themeHexRepresentation)
+      ..setBackgroundColor(backgroundHexRepresentation);
+    /// TODO: Кэшировать текущую тему
+    _log.vvvv('Смена темы оформления');
     yield AppThemeChangedState(event.appTheme);
   }
+  
+  //
+  Stream<AppState> _changeLocale(ChangeLocale event) async* {
+    //Lcl.locale = event.languageCode;
+    /// TODO: Кэшировать текущую локаль
+    _log.vvvv('Смена локали на: ${event.languageCode}');
+    yield LocalizationState(event.languageCode);
+  }
+  
 
   //
   AppState _handleItemSelection(HandleItemSelection event) {
