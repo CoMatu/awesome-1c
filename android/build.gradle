@@ -1,20 +1,21 @@
 buildscript {
-    ext.kotlin_version = '1.3.50'
     repositories {
-        google()
+        google() // Google's Maven repository
         jcenter()
+        //mavenLocal()
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.3' // <= firebase
     }
 }
 
 allprojects {
     repositories {
-        google()
+        google()  // Google's Maven repository
         jcenter()
+        //mavenLocal()
     }
 }
 

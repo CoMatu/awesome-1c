@@ -1,6 +1,6 @@
 @echo off
 @echo.
-@echo ~~~ PUBLISH ~~~
+@echo ~~~ DEPLOY WEB FIREBASE
 @echo.
 @call flutter pub get
 @echo.

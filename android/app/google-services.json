@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "695512621921",
+    "firebase_url": "https://awesome1c.firebaseio.com",
+    "project_id": "awesome1c",
+    "storage_bucket": "awesome1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695512621921:android:62815ff05135553cf61b20",
+        "android_client_info": {
+          "package_name": "dev.plugfox.awesome1c"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695512621921-kko4ahubfc178krhr9n3th77k5kfci49.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.plugfox.awesome1c",
+            "certificate_hash": "45e1c39af86039dfd430661f64c0f5348e731d4b"
+          }
+        },
+        {
+          "client_id": "695512621921-qv4ijd1obt90nn26lm8hspbni63f3ohv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASOh2KUG2Lnq1enO9T8DuJqwI33qY3TDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695512621921-qv4ijd1obt90nn26lm8hspbni63f3ohv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
