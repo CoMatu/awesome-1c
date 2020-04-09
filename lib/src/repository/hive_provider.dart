@@ -7,10 +7,12 @@ class HiveProvider {
   //final Log _log = Log();
   bool _isInit = false;
   
-  //
-  //Box<User> _userBox;
-  //Box<Item> _itemsBox;
-  /// TODO: Settings box
+
+  LazyBox<String> _settingsBox;
+  LazyBox<String> get settingsBox => _settingsBox;
+  
+  Box<User> _userBox;
+  Box<Item> _itemsBox;
 
   /// Проверка инициализации Firebase
   Future<void> init() async {
@@ -19,8 +21,9 @@ class HiveProvider {
     Hive.registerAdapter<User>(UserAdapter());
     Hive.registerAdapter<Item>(ItemAdapter());
 
-    //_userBox = await Hive.openBox<User>('user');
-    //_itemsBox = await Hive.openBox<Item>('items');
+    _settingsBox = await Hive.openLazyBox<String>('settings');
+    _userBox = await Hive.openBox<User>('user');
+    _itemsBox = await Hive.openBox<Item>('items');
     
     _isInit = true;
   }

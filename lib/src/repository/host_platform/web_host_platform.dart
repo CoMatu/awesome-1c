@@ -36,9 +36,12 @@ class WebHostPlatform implements HostPlatform {
   }
   static String _getVersion() =>
     html.window.navigator.appVersion ?? '0.0';
-  static String _getLocale() =>
-    html.window.navigator.language ?? 'en';
-  
+  static String _getLocale() {
+    String lang = html.window.navigator.language?.split('-')?.first?.split('_')?.first?.trim()?.toLowerCase();
+    if (lang is! String || lang.length != 2) return 'en';
+    return lang;
+  }
+
   @override
   void setThemeColor(String color) {
     html.document.querySelector('meta[name=theme-color]').attributes['content'] = color;

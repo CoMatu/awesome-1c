@@ -1,6 +1,6 @@
-import 'package:awesome1c/src/models/app_theme.dart';
-import 'package:flutter/material.dart' show Colors;
 import 'package:test/test.dart';
+import 'package:flutter/material.dart' show Colors;
+import 'package:awesome1c/src/models/app_theme.dart';
 
 void main() {
   test('Color to hex', () {

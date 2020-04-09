@@ -6,24 +6,27 @@ import 'package:flutter/material.dart' show BuildContext, Locale, Localizations,
 ///
 @immutable
 class Localizer {
+
   const Localizer(this.locale);
 
   final Locale locale;
+
   String get languageCode => locale.languageCode;
+
   String get language => _languages[locale.languageCode];
 
   static Localizer of(BuildContext context) =>
     Localizations.of<Localizer>(context, Localizer);
-  
+
   static Iterable<String> get supportedLanguageCodes =>
     _languages.keys;
 
   static Iterable<Locale> get supportedLocales =>
     _languages.keys.map<Locale>((String code) => Locale(code));
-    
+
   static Locale get defaultLocale =>
-    Locale(_languages.keys.first);
-  
+    Locale(_languages.keys.first);  
+
   static const Map<String, String> _languages = <String, String>{
     'en': 'English',
     'ru': 'Русский',
@@ -35,10 +38,11 @@ class Localizer {
 ///
 @immutable
 class LocalizerDelegate extends LocalizationsDelegate<Localizer> {
+
   const LocalizerDelegate();
-  
+
   @override
-  bool isSupported(Locale locale) => 
+  bool isSupported(Locale locale) =>
     Localizer.supportedLanguageCodes.contains(locale.languageCode);
 
   @override
@@ -51,7 +55,9 @@ class LocalizerDelegate extends LocalizationsDelegate<Localizer> {
 
 ///
 class Dictionaries {
-  final Map<String, Map<String, String>> _localizedValues = {};  
+
+  final Map<String, Map<String, String>> _localizedValues = {};
+
   static Map<String, Map<String, String>> get localizedValues => _instance._localizedValues;
 
   static String get(String languageCode, String key) =>

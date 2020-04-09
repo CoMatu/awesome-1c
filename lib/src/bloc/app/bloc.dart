@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:pedantic/pedantic.dart' show unawaited;
 import 'package:bloc/bloc.dart';
 import 'package:rxdart/rxdart.dart';
+import '../../models/app_theme.dart';
 import '../../models/item.dart';
 import '../../models/user.dart';
 import '../../repository/firebase_provider.dart';
@@ -15,6 +16,7 @@ import 'states.dart';
 export 'events.dart';
 export 'states.dart';
 
+/// TODO: Переписать без asyncExpand, зависимости от rxdart и использованием изолятов/сервайс вокеров
 /// BLoC приложения
 class AppBloc extends Bloc<AppEvent, AppState> {
   @override
@@ -77,9 +79,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     await Dictionaries.fill();
     _log.vvvv('Словари локализации заполнены');
 
-    /// TODO: Получить локаль
+    // Получить локаль
+    String languageCode  = await _hiveProvider.settingsBox.get('lang', defaultValue: _platform.locale);
+    yield LocalizationState(languageCode);
     
-    /// TODO: Получить тему
+    // Получить тему
+    String appThemeString = await _hiveProvider.settingsBox.get('theme', defaultValue: 'unknown');
+    AppTheme appTheme = AppTheme.fromHiveString(appThemeString);
+    yield AppThemeChangedState(appTheme);
 
     yield InitializedAppState();
     _log.vvv('Приложение успешно инициализировано');
@@ -92,20 +99,27 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   //
   Stream<AppState> _changeAppTheme(ChangeAppTheme event) async* {
+    // Кэшировать текущую тему
+    unawaited(
+      _hiveProvider.settingsBox.put('theme', event.appTheme?.toHiveString())
+    );
+
     final String themeHexRepresentation = '#${event.appTheme?.themeData?.primaryColor?.value?.toRadixString(16)?.padLeft(8, '0')?.substring(2) ?? '2196f3'}';    
     final String backgroundHexRepresentation = '#${event.appTheme.themeData?.backgroundColor?.value?.toRadixString(16)?.padLeft(8, '0')?.substring(2) ?? '90caf9'}';
     _platform.hostPlatform
       ..setThemeColor(themeHexRepresentation)
       ..setBackgroundColor(backgroundHexRepresentation);
-    /// TODO: Кэшировать текущую тему
     _log.vvvv('Смена темы оформления');
     yield AppThemeChangedState(event.appTheme);
   }
   
   //
   Stream<AppState> _changeLocale(ChangeLocale event) async* {
-    //Lcl.locale = event.languageCode;
-    /// TODO: Кэшировать текущую локаль
+    // Кэшировать текущую локаль
+    unawaited(
+      _hiveProvider.settingsBox.put('lang', event.languageCode)
+    );
+
     _log.vvvv('Смена локали на: ${event.languageCode}');
     yield LocalizationState(event.languageCode);
   }

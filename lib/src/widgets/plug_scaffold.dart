@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../bloc/bloc.dart';
 import '../models/user.dart';
+import '../repository/localizer.dart';
 import '../screens/screens.dart';
 import 'low_resolution.dart';
 
@@ -138,8 +139,8 @@ class _SearchField extends StatelessWidget {
   Widget build(BuildContext context) =>
     TextField(
       controller: Provider.of<_AppBarSearchController>(context).searchController,
-      decoration: const InputDecoration(
-        hintText: 'Поиск...'
+      decoration: InputDecoration(
+        hintText: '${Localizer.of(context)['search']}...'
       ),
     );
 }
@@ -185,14 +186,16 @@ class _PlugScaffoldDrawer extends StatelessWidget {
           _PlugScaffoldDrawerHeader(),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: const Text('Настройки'),
+            title: Text(Localizer.of(context)['settings']),
             onTap: () => Navigator.of(context)?.pushNamed(SettingsScreen.route),
           ),
+          /*
           const ListTile(
             leading: Icon(Icons.settings),
             title: Text('Об авторе'),
             onTap: null, /// TODO: Реализовать экран контактов
           ),
+          */
         ],
       ),
     );

@@ -18,7 +18,11 @@ class FirebaseProvider {
   /// Проверка инициализации Firebase
   Future<void> init() async {
     if (_isInit) return;
-    _app = await fb_core.FirebaseApp.allApps().then((List<fb_core.FirebaseApp> apps) => apps?.first);
+    List<fb_core.FirebaseApp> _apps = await fb_core.FirebaseApp.allApps();
+    if (_apps == null || _apps.isEmpty) {
+      throw 'No FirebaseApps';
+    }
+    _app = _apps?.first;
     _auth = fb_auth.FirebaseAuth.fromApp(_app);
     _store = fb_store.Firestore.instance;    
     _isInit = _app is fb_core.FirebaseApp;

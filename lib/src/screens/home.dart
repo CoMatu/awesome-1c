@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    super.initState();
+    super.initState(); // TODO: показать экран с подсказками, предложить установить мобильное приложение
   }
 
   @override
@@ -39,8 +39,22 @@ class _HomeScreenState extends State<HomeScreen> {
           searchController: _textEditingController,
           createButtonCallback: () => blocHolder?.appBloc?.add(const HandleItemSelection()),
           child: const ItemsListWidget(),
-          extraChild: const Center(
-            child: ItemWidget(),
+          extraChild: Center(
+            child: StreamBuilder<ItemState>( 
+              stream: blocHolder?.appBloc?.whereState<ItemState>(),
+              builder: (BuildContext context, AsyncSnapshot<ItemState> snap) {
+                final ItemState _state = snap?.data;
+                if (_state is ReadItem) {
+                  return ItemWidget(item: _state.item, mode: ItemWidgetMode.read,);
+                } else if (_state is UpdateItem) {
+                  return ItemWidget(item: _state.item, mode: ItemWidgetMode.update,);
+                } else if (_state is CreateItem) {
+                  return ItemWidget(item: _state.item, mode: ItemWidgetMode.create,);
+                } else {
+                  return const ItemWidget(mode: ItemWidgetMode.unknown,);
+                }
+              }
+            ),
           ),
         ),
     );

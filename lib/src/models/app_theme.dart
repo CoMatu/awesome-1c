@@ -10,8 +10,10 @@ enum _AppThemeOptions {
   unknown,
 }
 
+///
 class AppTheme {
-  /// TODO: фоновая картинка в стиле вотсапа
+  /// TODO: фоновая картинка в стиле вотсапа (брать из ассетов)
+  
   static const String fontFamily = 'JetBrainsMono';
   //static const TextTheme textTheme = TextTheme();
 
@@ -27,6 +29,25 @@ class AppTheme {
   factory AppTheme.fuchsia() => const AppTheme._internal(_AppThemeOptions.fuchsia);
   factory AppTheme.darcula() => const AppTheme._internal(_AppThemeOptions.darcula);
 
+  factory AppTheme.fromHiveString(String value) {
+    _AppThemeOptions _appThemeOptionsfromHiveStringRouter() {
+      switch (value) {
+        case ('vanilla'): return _AppThemeOptions.vanilla;
+        case ('legacy'): return _AppThemeOptions.legacy;
+        case ('material'): return _AppThemeOptions.material;
+        case ('simple'): return _AppThemeOptions.simple;
+        case ('fuchsia'): return _AppThemeOptions.fuchsia;
+        case ('darcula'): return _AppThemeOptions.darcula;
+        case ('unknown'):
+        default: return _AppThemeOptions.unknown;
+      }      
+    }
+    return AppTheme._internal(_appThemeOptionsfromHiveStringRouter());
+  }
+
+  String toHiveString() =>
+    _option?.toString()?.split('.')?.last?.toLowerCase() ?? 'vanilla';
+
   static ThemeData _getThemeData(_AppThemeOptions option) {
     ThemeData _currentThemeRouter() {
       switch (option) {
@@ -41,11 +62,7 @@ class AppTheme {
       }      
     }
     return _currentThemeRouter();
-    /*
-    return _currentThemeRouter().copyWith(
-      textTheme: textTheme,
-    );
-    */
   }
+  
 }
 
